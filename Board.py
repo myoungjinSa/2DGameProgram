@@ -1,18 +1,24 @@
-import pico2d
+from pico2d import *
 
 class Board:
+    boardImage = None
+    stageImage = None
     def __init__(self):
-        self.boardImage = pico2d.load_image('Board.bmp')   #보드판의 이미지 추가
-        self.StageImage = pico2d.load_image('stage_bitmap.bmp') #스테이지 이미지 추가
-        self.BoardPosX, self.BoardPosY = 300, 400 #보드판이 그려질 위치
-        self.BoardSize.x, self.BoardSize.y = 600, 761 #보드판의 사이즈
-        self.StagePosX,self.StagePosY = 900,400 #스테이지 위치
-        self.StageSizeX,self.StageSizeY = 584,761 #스테이지 이미지 사이즈
+        self.BoardPosX, self.BoardPosY = 300, 370 #보드판이 그려질 위치
+        self.BoardWidth, self.BoardHeight = 600, 761 #보드판의 사이즈
+        self.StagePosX,self.StagePosY = 880,370 #스테이지 위치
+        self.StageSizeX,self.StageSizeY = 561,761 #스테이지 이미지 사이즈
+        self.BoardLeftTopX = self.BoardPosX-300
+        self.BoardLeftTopY = self.BoardPosY-370
+        if Board.boardImage == None and Board.stageImage ==None:
+            Board.boardImage = load_image('board.png')
+            Board.stageImage = load_image('stage_bitmap.png')
 
     def update(self):
         pass
 
 
     def draw(self):
-        pass
+        self.boardImage.draw(self.BoardPosX,self.BoardPosY,self.BoardWidth,self.BoardHeight)
+        self.stageImage.draw(self.StagePosX,self.StagePosY,self.StageSizeX,self.StageSizeY)
 

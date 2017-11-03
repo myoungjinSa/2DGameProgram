@@ -2,6 +2,8 @@ import game_framework
 from pico2d import *
 import main_state
 import Font
+import Board
+
 
 
 
@@ -14,7 +16,8 @@ fonts = ["p.png","L.png","A.png","Y_two.png","W_small.png","I_small.png","T.png"
 StartFont = Font.FONT()
 font = [Font.FONT() for i in range(Font.FONT.count)]
 mouseDown = False
-
+Font.mouseOnGameStart =False
+board = None
 
 def SetPosition(font,startFont,x,y):
     font[0].SetFontPos(x, y)  # P 위치 세팅
@@ -35,15 +38,16 @@ def SetPosition(font,startFont,x,y):
 
 
 def enter():
-    global image,font
-    open_canvas(1180,750)
-    image = [load_image('Board.png'),load_image("stage_bitmap.png")]
+    global image,font,board
+    open_canvas(1160,750)
+    #board.boardImage = load_image('Board.png')
+    #image = [load_image('Board.png'),load_image("stage_bitmap.png")]
     j =0
     for i in fonts:
         font[j].SetImage(i)                 #폰트 이미지 세팅
         font[j].SetFontWH(30,30)            #폰트 크기  60,30 세팅
         j+=1
-
+    board = Board.Board()
     StartFont.SetImage("GameStart.png")     #게임시작 폰트 이미지 불러오기
     StartFont.SetFontWH(200,60)              #게임시작 폰트 크기 세팅
     SetPosition(font,StartFont,100,580)
@@ -73,11 +77,14 @@ def update():
 
 
 def draw():
-    global image,font,StartFont
-    image[0].draw(300,350)
-    image[1].draw(890,350)
+    global image,font,StartFont,board
+    board.draw()
+
+    #image[0].draw(300,350)
+    #image[1].draw(890,350)
     for i in range(13):
         font[i].draw()
+
 
     StartFont.draw()
     update_canvas()
@@ -91,7 +98,16 @@ def handle_events():
     events = get_events()
     for event in events:
         if event.type==SDL_MOUSEBUTTONDOWN:
-            mouseDown = True
+            x,y = event.x,729-event.y
+            if x>120 and x <390 and y>115 and y<185:
+                mouseDown = True
+        elif event.type == SDL_MOUSEMOTION:
+            x,y = event.x ,729-event.y
+            if x > 120 and x < 390 and y > 115 and y < 185:
+                Font.mouseOnGameStart = True
+            else:
+                Font.mouseOnGameStart = False
+
         elif event.type == SDL_QUIT:
             game_framework.quit()
 

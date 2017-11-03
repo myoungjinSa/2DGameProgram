@@ -1,5 +1,6 @@
 from pico2d import *
 
+mouseOnGameStart = False
 
 class FONT:
     fontString = []
@@ -28,8 +29,12 @@ class FONT:
 
 
     def draw(self):
-       # self.image.opacify(0.5)
-       self.image.draw(self.x,self.y,self.FontWidth,self.FontHeight)
+        global mouseOnGameStart
+        if mouseOnGameStart == True:
+            self.image.opacify(0.5)
+        else:
+            self.image.opacify(1)
+        self.image.draw(self.x,self.y,self.FontWidth,self.FontHeight)
 
 
     def update(self):
