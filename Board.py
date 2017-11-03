@@ -14,5 +14,5 @@ class Board:
 
 
     def draw(self):
-        pico2d.Font()
+        pass
 

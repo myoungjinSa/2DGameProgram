@@ -40,16 +40,13 @@ def handle_events():
 
 
 
-
-
-
 def update():
     pass
 
 
 def draw():
     clear_canvas()
-    font = Font("s",)
+
 
     update_canvas()
 
