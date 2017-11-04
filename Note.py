@@ -1,6 +1,6 @@
 from pico2d import *
 import random
-
+import main_state
 
 class NOTE:
     NoteImage= ["note_blue.png","note_red.png","note_grey.png","note_pink.png","note_orange.png"]
@@ -11,16 +11,17 @@ class NOTE:
         self.isHit = False      #노트 히트 검사 여부 플래그
         self.isSelect = False   #활성화 된 노트 플래그 True = 활성화 False = 비활성화
         #--------노트 이미지 변수-----------------------
-        self.image =None
+        self.image =load_image(NOTE.NoteImage[random.randint(0,3)])
         #--------노트 위치정보 -------------------------
-        self.LeftTopX = 20      #노트 왼쪽 x 좌표
-        self.LeftTopY =300     #노트 왼쪽 y 좌표
-        self.RightBottomX=self.LeftTopX + self.width #노트 오른쪽 아래 좌표
-        self.RightBottomY = self.LeftTopY+self.height
+        self.inputX=0.0         #입력 x정보
+        self.inputY=0.0         #입력 y정보
+        self.LeftTopX = 0.0
+        self.LeftTopY = 0.0
 
-    def SetImage(self):
-        if self.image ==None:
-            self.image = load_image(NOTE.NoteImage[random.randint(0,3)])   #노트 이미지 NoteImage 인덱스중에서 랜덤으로 로딩
+
+   # def SetImage(self):
+     #   if self.image ==None:
+       #     self.image = load_image(NOTE.NoteImage[random.randint(0,3)])   #노트 이미지 NoteImage 인덱스중에서 랜덤으로 로딩
 
     def SetPosition(self, x , y):
         self.LeftTopX = x
@@ -38,7 +39,7 @@ class NOTE:
 
 
     def draw(self):
-        if self.isSelect == True:
+        if self.isSelect is True:
             self.image.draw(self.LeftTopX,self.LeftTopY,self.width,self.height)
 
 

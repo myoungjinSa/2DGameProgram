@@ -11,6 +11,7 @@ board = None
 stage = None
 music_time =0.0
 note_manager = None
+NoteCount =False
 
 
 def enter():
@@ -19,6 +20,7 @@ def enter():
     note_manager = NoteManager()
     note_manager.CreateNoteList(300)
     note_manager.SetElementSelect()
+
 
 
 
@@ -48,30 +50,33 @@ def handle_events():
 
 
 def update():
-    global music_time,note_manager,note_list
+    global music_time,note_manager,note_list,NoteCount
 
 
-    if music_time >0.0:
-        note_manager.SetNotePos()
-        note_manager.SetNoteSpeed(30)
-        note_manager.UpCurrentIndex()
-        note_manager.UpCurrentElementCount()
+    if music_time >=0.0:
         note_manager.NoteDown()
 
 
 
-    delay(0.01)
-    music_time = music_time +1.0
+    delay(0.01)                             #0.01초 마다
+    music_time = music_time + 1
 
 def draw():
-    global board,note_manager
-    count =0
+    global music_time,board,note_manager
+
+    if music_time %100 == 0  :
+        note_manager.SetNotePos()
+        note_manager.SetNoteSpeed(3)
+        note_manager.UpCurrentIndex()
+        note_manager.UpCurrentElementCount()
+
     local_manager=note_manager.GetNoteList()
     clear_canvas()
     board.draw()
     count = note_manager.GetCurrentIndex()
     for i in range(0,count):
-        local_manager[i].draw()
+        if local_manager[i].isSelect is True:
+            local_manager[i].draw()
 
     update_canvas()
 
