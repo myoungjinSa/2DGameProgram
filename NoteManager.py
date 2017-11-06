@@ -44,7 +44,7 @@ class NoteManager:
         self.SelectElementCount = self.maxElementCount
 
     def SetNotePos(self):
-        NoteManager.noteList[self.currentIndex].inputX=500
+        NoteManager.noteList[self.currentIndex].inputX=540
         NoteManager.noteList[self.currentIndex].inputY=600
         NoteManager.noteList[self.currentIndex].LeftTopX = NoteManager.noteList[self.currentIndex].inputX - NoteManager.noteList[self.currentIndex].width
         NoteManager.noteList[self.currentIndex].LeftTopY = NoteManager.noteList[self.currentIndex].inputY - NoteManager.noteList[self.currentIndex].height
