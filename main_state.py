@@ -13,10 +13,12 @@ music_time =0.0
 note_manager = None
 NoteCount =False
 
+Key_Status = {0:"SDLK_a",1:"SDLK_s",2:"SDLK_d",3:"SDLK_f",4:"SDLK_RETURN"}
 
 def enter():
     global board,note_manager,note_list
-    board = Board.Board()
+    board = Board.BOARD()
+    board.CreateKeyBox()
     note_manager = NoteManager()
     note_manager.CreateNoteList(300)
     note_manager.SetElementSelect()
@@ -40,12 +42,23 @@ def resume():
 
 
 def handle_events():
+    global Key_Status
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key== SDLK_ESCAPE:
             game_framework.quit()
+        elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_a):
+            Board.BOARD.GiveKeyBoxSelect(0)
+        elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_s):
+            Board.BOARD.GiveKeyBoxSelect(1)
+        elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_d):
+            Board.BOARD.GiveKeyBoxSelect(2)
+        elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_f):
+            Board.BOARD.GiveKeyBoxSelect(3)
+        elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_RETURN):
+            Board.BOARD.GiveKeyBoxSelect(4)
 
 
 
@@ -62,9 +75,9 @@ def update():
     music_time = music_time + 1
 
 def draw():
-    global music_time,board,note_manager
+    global music_time,board,note_manager,name
 
-    if music_time %100 == 0  :
+    if music_time %100 == 0 :               #1초마다
         note_manager.SetNotePos()
         note_manager.SetNoteSpeed(3)
         note_manager.UpCurrentIndex()
@@ -72,7 +85,7 @@ def draw():
 
     local_manager=note_manager.GetNoteList()
     clear_canvas()
-    board.draw()
+    board.draw(name)
     count = note_manager.GetCurrentIndex()
     for i in range(0,count):
         if local_manager[i].isSelect is True:

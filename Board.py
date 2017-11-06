@@ -1,8 +1,13 @@
 from pico2d import *
+from Note import *
 
-class Board:
-    boardImage = None
+
+
+
+class BOARD:
     stageImage = None
+    boardImage = None
+
     def __init__(self):
         self.BoardPosX, self.BoardPosY = 300, 370 #보드판이 그려질 위치
         self.BoardWidth, self.BoardHeight = 600, 761 #보드판의 사이즈
@@ -10,15 +15,39 @@ class Board:
         self.StageSizeX,self.StageSizeY = 561,761 #스테이지 이미지 사이즈
         self.BoardLeftTopX = self.BoardPosX-300
         self.BoardLeftTopY = self.BoardPosY-370
-        if Board.boardImage == None and Board.stageImage ==None:
-            Board.boardImage = load_image('board.png')
-            Board.stageImage = load_image('stage_bitmap.png')
+        self.count = 5                            #보드의 분할된 갯수
+        self.KeyBox = None                          #키 박스 초기화
+        if BOARD.stageImage==None and BOARD.boardImage ==None:  #보드판과 키박스 이미지가 None 이면 이미지 삽입
+            self.stageImage = load_image('stage_bitmap.png')
+            self.boardImage = load_image('board.png')
+
+
+    def CreateKeyBox(self):                                     #키박스 생성 함수
+        if self.KeyBox == None:                                 #키박스가 없으면
+            self.KeyBox = [NOTE(True) for i in range(0,5)]      #KeyBox 5개 설정
+
+
+        for i in range(0,5):
+            self.KeyBox[i].SetIsKeyBoxTrue()
+            self.KeyBox[i].SetPosition(59+(i*self.KeyBox[i].width),15)
+
+    def GiveKeyBoxSelect(self,num):                                 #KeyBox 활성화하는 함수
+        if self.KeyBox[num] != None:
+            self.KeyBox[num].isSelect = True
+
+    def GiveKeyBoxUnSelect(self,num):                               #KeyBox 비활성화 함수
+        if self.KeyBox[num]!=None:
+            self.KeyBox[num].isSelect = False
+
 
     def update(self):
         pass
 
 
-    def draw(self):
-        self.boardImage.draw(self.BoardPosX,self.BoardPosY,self.BoardWidth,self.BoardHeight)
-        self.stageImage.draw(self.StagePosX,self.StagePosY,self.StageSizeX,self.StageSizeY)
+    def draw(self,name):
+            self.boardImage.draw(self.BoardPosX,self.BoardPosY,self.BoardWidth,self.BoardHeight)
+            self.stageImage.draw(self.StagePosX,self.StagePosY,self.StageSizeX,self.StageSizeY)
 
+            if self.KeyBox !=None:
+                for i in range(0,self.count):
+                    self.KeyBox[i].draw()

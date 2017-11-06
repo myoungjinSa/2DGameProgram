@@ -38,7 +38,7 @@ def SetPosition(font,startFont,x,y):
 
 
 def enter():
-    global image,font,board
+    global image,font,board,name
     open_canvas(1160,750)
     #board.boardImage = load_image('Board.png')
     #image = [load_image('Board.png'),load_image("stage_bitmap.png")]
@@ -47,7 +47,7 @@ def enter():
         font[j].SetImage(i)                 #폰트 이미지 세팅
         font[j].SetFontWH(30,30)            #폰트 크기  60,30 세팅
         j+=1
-    board = Board.Board()
+    board = Board.BOARD()
     StartFont.SetImage("GameStart.png")     #게임시작 폰트 이미지 불러오기
     StartFont.SetFontWH(200,60)              #게임시작 폰트 크기 세팅
     SetPosition(font,StartFont,100,580)
@@ -77,8 +77,8 @@ def update():
 
 
 def draw():
-    global image,font,StartFont,board
-    board.draw()
+    global image,font,StartFont,board,name
+    board.draw(name)
 
     #image[0].draw(300,350)
     #image[1].draw(890,350)
