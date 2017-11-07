@@ -1,7 +1,7 @@
 from pico2d import *
 import game_framework
-import Board
 from NoteManager import *
+from Board import *
 
 
 name = "MainState"
@@ -17,7 +17,7 @@ Key_Status = {0:"SDLK_a",1:"SDLK_s",2:"SDLK_d",3:"SDLK_f",4:"SDLK_RETURN"}
 
 def enter():
     global board,note_manager,note_list
-    board = Board.BOARD()
+    board = BOARD()
     board.CreateKeyBox()
     note_manager = NoteManager()
     note_manager.CreateNoteList(300)
@@ -50,15 +50,15 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key== SDLK_ESCAPE:
             game_framework.quit()
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_a):
-            Board.BOARD.GiveKeyBoxSelect(0)
+            board.GiveKeyBoxSelect(0)
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_s):
-            Board.BOARD.GiveKeyBoxSelect(1)
+            board.GiveKeyBoxSelect(1)
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_d):
-            Board.BOARD.GiveKeyBoxSelect(2)
+            board.GiveKeyBoxSelect(2)
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_f):
-            Board.BOARD.GiveKeyBoxSelect(3)
+            board.GiveKeyBoxSelect(3)
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_RETURN):
-            Board.BOARD.GiveKeyBoxSelect(4)
+            board.GiveKeyBoxSelect(4)
 
 
 

@@ -1,6 +1,5 @@
 from pico2d import *
 import random
-import main_state
 
 
 
@@ -16,7 +15,7 @@ class NOTE:
         self.isSelect = False   #활성화 된 노트 플래그 True = 활성화 False = 비활성화
         #--------노트 이미지 변수-----------------------
         if bool == False:                                                       #bool 이 False 이면 일반 노트 이미지 로딩
-            self.image =load_image(NOTE.NoteImage[random.randint(0,3)])         #image에 NoteImage 인덱스 0~3중 랜덤으로 이미지 삽입
+            self.image =load_image(NOTE.NoteImage[random.randint(0,4)])         #image에 NoteImage 인덱스 0~3중 랜덤으로 이미지 삽입
         else:                                                                   #bool 이 True 이면 KeyBox 이미지 로딩
             self.image =load_image(NOTE.KeyBoxImage[NOTE.index%5])              #image에 KeyBoxImage 인덱스 5개를 인덱스 값을 증가시키며 나머지 연산으로 삽입
             NOTE.index+=1
@@ -52,16 +51,16 @@ class NOTE:
 
 
     def draw(self):
-        if self.isSelect == True and self.isKeyBox==False:
+        if self.isSelect is True and self.isKeyBox is False:
             self.image.draw(self.CenterX,self.CenterY,self.width,self.height)
 
-        if self.isKeyBox is True:
-            if self.isSelect==True:
-                self.image.opacify(0.5)
-                self.image.draw(self.CenterX,self.CenterY,self.width,self.height)
-            else:
-                self.image.draw(self.CenterX, self.CenterY, self.width, self.height)
 
+        if self.isKeyBox is True:
+            if self.isSelect is True:
+                self.image.opacify(0.5)
+                self.image.draw(self.CenterX, self.CenterY, self.width, self.height)
+            else:
+                self.image.opacify(1)
 
 
 

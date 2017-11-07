@@ -1,6 +1,5 @@
-from pico2d import *
 from Note import *
-
+from pico2d import *
 
 
 
@@ -36,7 +35,7 @@ class BOARD:
             self.KeyBox[num].isSelect = True
 
     def GiveKeyBoxUnSelect(self,num):                               #KeyBox 비활성화 함수
-        if self.KeyBox[num]!=None:
+        if self.KeyBox[num] !=None:
             self.KeyBox[num].isSelect = False
 
 
@@ -50,4 +49,5 @@ class BOARD:
 
             if self.KeyBox !=None:
                 for i in range(0,self.count):
-                    self.KeyBox[i].draw()
+                        self.KeyBox[i].draw()
+
