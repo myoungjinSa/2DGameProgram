@@ -1,6 +1,8 @@
 from pico2d import *
 from Note import *
-import Board
+from main_state import *
+from Board import *
+
 
 class NoteManager:
     noteList = None
@@ -29,11 +31,21 @@ class NoteManager:
                 NoteManager.noteList[i].isSelect = False
                 NoteManager.noteList[i].height =0
                 NoteManager.noteList[i].width =0
-                NoteManager.noteList[i].inputX=0.0
-                NoteManager.noteList[i].inputY =0.0
                 NoteManager.noteList[i].CenterX =0.0
                 NoteManager.noteList[i].CenterY =0.0
                 NoteManager.noteList[i].speed = 0
+
+
+    def CheckCrushKeyBox(self,board,index):
+        if board.KeyBox[index] != None:
+            if board.KeyBox[index].isSelect == True:
+                for i in range(0,self.currentIndex):
+                    if self.noteList[i].CenterY-self.noteList[i].height/2 < board.KeyBox[index].CenterY+self.noteList[i].height/2 +50                 \
+                    and self.noteList[i].CenterX-1 == board.KeyBox[index].CenterX :
+                        self.SetElementUnselect(i)
+                        self.SetNotePosZero(i)
+
+
 
 
 
@@ -43,11 +55,21 @@ class NoteManager:
 
         self.SelectElementCount = self.maxElementCount
 
-    def SetNotePos(self):
-        NoteManager.noteList[self.currentIndex].inputX=540
-        NoteManager.noteList[self.currentIndex].inputY=600
-        NoteManager.noteList[self.currentIndex].CenterX = NoteManager.noteList[self.currentIndex].inputX - NoteManager.noteList[self.currentIndex].width
-        NoteManager.noteList[self.currentIndex].CenterY = NoteManager.noteList[self.currentIndex].inputY - NoteManager.noteList[self.currentIndex].height
+
+    def SetElementUnselect(self,index):
+        if NoteManager.noteList[index].isSelect is True:
+            NoteManager.noteList[index].isSelect = False
+            self.SelectElementCount-=1
+
+
+    def SetNotePos(self,Xpos):
+        if Xpos >=0 and Xpos<=4:
+            NoteManager.noteList[self.currentIndex].CenterX =NoteManager.noteList[self.currentIndex].width/2+(NoteManager.noteList[self.currentIndex].width)*Xpos   #이미지의 그리는 기준이 중점이기 때문에 0 일경우 노트의 절반만 나오게된다
+                                                                                                                                                                    #따라서 노트의 절반을 이동 시킨후 xpos의 값과 노트의 width를 곱해서
+                                                                                                                                                                    #노트의 위치를 설정하게 된다.
+            NoteManager.noteList[self.currentIndex].CenterY =735                                                                                                    #이미지의 가장 윗점 750 - Note.Height/2(15)  = 735
+
+
 
     def NoteDown(self):
         if self.currentElementCount>=0:
@@ -62,8 +84,12 @@ class NoteManager:
         self.currentElementCount+=1
 
 
-    def SetNotePosZero(self):
-        pass
+    def SetNotePosZero(self,index):
+        NoteManager.noteList[index].CenterX =0
+        NoteManager.noteList[index].CenterY =0
+        NoteManager.noteList[index].speed =0
+        NoteManager.noteList[index].width = 0
+        NoteManager.noteList[index].height = 0
 
 
     def SetNoteSpeed(self,speed):
