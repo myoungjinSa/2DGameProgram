@@ -6,7 +6,7 @@ class GuitarList:
     def __init__(self):
         self.positionX,self.positionY =0.0 , 0.0
         self.width = 99
-        self.height =87
+        self.height= 87
         self.image = [load_image(GuitarList.Guitar_Image_List[i]) for i in range(0,6)]
 
     def SetPosition(self,x,y):
