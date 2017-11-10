@@ -9,7 +9,7 @@ class NOTE:
     def __init__(self,bool):                            #bool 값이 False 이면 일반 노트이미지를 로드하며 True 이면 KeyBox 이미지를 로드한다.
         self.width = 120        #노트 너비
         self.height = 30        #노트 높이
-        self.speed =0           #노트 스피드
+        self.speed = 0           #노트 스피드
         self.isHit = False      #노트 히트 검사 여부 플래그
         self.isSelect = False   #활성화 된 노트 플래그 True = 활성화 False = 비활성화
         self.isKeyBox = False   #KeyBox 가 아니면 False KeyBox 이면 True

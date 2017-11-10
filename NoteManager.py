@@ -71,10 +71,13 @@ class NoteManager:
 
 
 
-    def NoteDown(self):
+    def NoteDown(self,):
         if self.currentElementCount>=0:
             for i in range(0,self.currentIndex):
                 NoteManager.noteList[i].CenterY -= self.noteList[i].speed             #각 개별 노트의 스피드만큼 떨어짐
+
+    def GetCurrentNote(self):
+        return self.currentIndex
 
     def UpCurrentIndex(self):
         self.currentIndex+=1

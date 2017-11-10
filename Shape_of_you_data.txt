@@ -1,0 +1,13 @@
+{
+    "0":{"Create_Sec":30,"Xpos":0,"Speed":15},
+    "1":{"Create_Sec":10,"Xpos":2,"Speed":15},
+    "2":{"Create_Sec":10,"Xpos":2,"Speed":15},
+    "3":{"Create_Sec":10, "Xpos":4,"Speed":15},
+    "4":{"Create_Sec":10, "Xpos":3,"Speed":15},
+    "5":{"Create_Sec":25, "Xpos":1,"Speed":15},
+    "6":{"Create_Sec":20, "Xpos":0,"Speed":20},
+    "7":{"Create_Sec":40, "Xpos":4,"Speed":15},
+    "8":{"Create_Sec":20, "Xpos":1,"Speed":15},
+    "9":{"Create_Sec":20, "Xpos":2,"Speed":15},
+    "10":{"Create_Sec":30, "Xpos":2,"Speed":15}
+}

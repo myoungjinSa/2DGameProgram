@@ -1,11 +1,14 @@
 import pico2d
 
 class GameManager:
+    df
+
     def __init__(self):
         self.level = ["Level_One","Level_Two","Level_Three"]
         self.HitCount =0          #히트 카운트 변수
         self.HitMax =0             #실패하지않고 최대 히트한수
         self.HitTotal =0           #총 히트수
+        self.pRevHit =0             #0으로 세팅되기전 hit수를 담는 변수
 
 
 
