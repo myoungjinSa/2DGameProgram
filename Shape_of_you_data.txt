@@ -9,5 +9,7 @@
     "7":{"Create_Sec":40, "Xpos":4,"Speed":15},
     "8":{"Create_Sec":20, "Xpos":1,"Speed":15},
     "9":{"Create_Sec":20, "Xpos":2,"Speed":15},
-    "10":{"Create_Sec":30, "Xpos":2,"Speed":15}
+    "10":{"Create_Sec":30, "Xpos":2,"Speed":15},
+    "11":{"Create_Sec":30, "Xpos":1,"Speed":15},
+    "12":{"Create_Sec":10, "Xpos":4,"Speed":10}
 }
