@@ -1,7 +1,6 @@
-import pico2d
+from pico2d import *
 
 class GameManager:
-    df
 
     def __init__(self):
         self.level = ["Level_One","Level_Two","Level_Three"]
@@ -9,7 +8,7 @@ class GameManager:
         self.HitMax =0             #실패하지않고 최대 히트한수
         self.HitTotal =0           #총 히트수
         self.pRevHit =0             #0으로 세팅되기전 hit수를 담는 변수
-
+        self.font = load_font('ENCR10B.TTF',16)
 
 
     def SetStageLevel(self,level):  #stage level 별로 난이도 설정할수 있게 함수 구현
@@ -25,7 +24,7 @@ class GameManager:
         return self.HitTotal
 
     def HitCount(self):         #히트수 증가 함수
-        self.Hit +=1
+        self.HitCount +=1
 
 
     def ShowGameResult(self):
@@ -36,7 +35,7 @@ class GameManager:
 
 
     def GameInfoDraw(self):             #게임 정보 그리기
-        pass
+        print("HIT:%d",self.HitCount)
 
 
     def ChangeGameStatus(self,status):

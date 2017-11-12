@@ -4,6 +4,7 @@ from NoteManager import *
 from Board import *
 from GameCharacter import *
 from Sound import *
+from gameManager import  *
 import json
 
 
@@ -24,6 +25,7 @@ Frame_Rate = 0.0
 music_data = None
 music = SOUND()
 sound = None
+GM = None
 #-----------------------------------------
 #               시간
 #보드의 세로 높이는     750
@@ -40,6 +42,7 @@ def enter():
     global board,note_manager,note_list
     global guitar_list,Current_Time
     global music,music_data
+    global GM
     #-------보드 위치 세팅----------------
     board = BOARD()
     board.CreateKeyBox()
@@ -63,7 +66,9 @@ def enter():
     music_data = json.load(text_data_file)
     text_data_file.close()
 
-
+    #------------------------------------
+    #------게임 매니저 변수 초기화---------
+    GM = GameManager()
 
 
 
@@ -141,7 +146,6 @@ def draw():
         note_manager.UpCurrentIndex()
         note_manager.UpCurrentElementCount()
         music_time = 0.0                                                                                #한번 if문에 들어오면 다시 music_time 초기화
-
     local_manager=note_manager.GetNoteList()
     clear_canvas()
     board.draw(name)

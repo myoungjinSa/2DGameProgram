@@ -16,9 +16,9 @@ class BOARD:
         self.count = 5                            #보드의 분할된 갯수
         self.KeyBox = None                         #키 박스 초기화
         self.Hit_Effect_PosX =0.0                  #히트 이펙트가 그려질 X위치
-        self.Hit_Effect_PosY =105.0                #히트 이펙트가 그려질 Y위치
+        self.Hit_Effect_PosY =78.0                #히트 이펙트가 그려질 Y위치
         self.Hit_Effect_Width =120
-        self.Hit_Effect_Height = 150
+        self.Hit_Effect_Height = 100
         if BOARD.stageImage==None and BOARD.boardImage ==None:  #보드판과 키박스 이미지가 None 이면 이미지 삽입
             self.stageImage = load_image('stage_bitmap.png')
             self.boardImage = load_image('board.png')
@@ -61,7 +61,7 @@ class BOARD:
                 self.KeyBox[i].draw()
 
         if BOARD.isKey_Down == True:
-            self.Hit_Effect.opacify(0.5)
+            self.Hit_Effect.opacify(0.7)
             self.Hit_Effect.draw(self.Hit_Effect_PosX,self.Hit_Effect_PosY,self.Hit_Effect_Width,self.Hit_Effect_Height)
 
 
