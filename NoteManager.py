@@ -6,6 +6,7 @@ from Board import *
 
 class NoteManager:
     noteList = None
+
     def __init__(self):
         self.maxElementCount = 0
         self.currentElementCount =0
@@ -41,7 +42,7 @@ class NoteManager:
             if board.KeyBox[index].isSelect == True:
                 for i in range(0,self.currentIndex):
                     if self.noteList[i].CenterY-self.noteList[i].height/2 < board.KeyBox[index].CenterY+self.noteList[i].height/2 +50                 \
-                    and self.noteList[i].CenterX-1 == board.KeyBox[index].CenterX :
+                    and self.noteList[i].CenterX-1 == board.KeyBox[index].CenterX:
                         self.SetElementUnselect(i)
                         self.SetNotePosZero(i)
 
@@ -70,11 +71,11 @@ class NoteManager:
             NoteManager.noteList[self.currentIndex].CenterY =735                                                                                                    #이미지의 가장 윗점 750 - Note.Height/2(15)  = 735
 
 
-
-    def NoteDown(self,):
+    def NoteDown(self,Frame_Time):
         if self.currentElementCount>=0:
             for i in range(0,self.currentIndex):
-                NoteManager.noteList[i].CenterY -= self.noteList[i].speed             #각 개별 노트의 스피드만큼 떨어짐
+                NoteManager.noteList[i].distance = Frame_Time*NoteManager.noteList[i].speed                         # 거리 = 프레임 경과시간 * 각 개별 노드 속도
+                NoteManager.noteList[i].CenterY = NoteManager.noteList[i].CenterY-NoteManager.noteList[i].distance  # 다음 프레임에서의 노드 위치 = 이전 프레임에서의 노드 위치 - 거리
 
     def GetCurrentNote(self):
         return self.currentIndex
@@ -96,7 +97,7 @@ class NoteManager:
 
 
     def SetNoteSpeed(self,speed):
-        NoteManager.noteList[self.currentIndex].speed = speed                          #현재 활성화된 노트의 스피드값 부여
+        NoteManager.noteList[self.currentIndex].speed = speed                          #현재 활성화된 노트의 스피드값 부여 속도값을 1000으로 설정 0.735초만에 생성되서 끝까지 내려가게됨
 
 
 

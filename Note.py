@@ -13,6 +13,7 @@ class NOTE:
         self.isHit = False      #노트 히트 검사 여부 플래그
         self.isSelect = False   #활성화 된 노트 플래그 True = 활성화 False = 비활성화
         self.isKeyBox = False   #KeyBox 가 아니면 False KeyBox 이면 True
+        self.distance = 0.0
         #--------노트 이미지 변수-----------------------
         if bool == False:                                                       #bool 이 False 이면 일반 노트 이미지 로딩
             self.image =load_image(NOTE.NoteImage[random.randint(0,4)])         #image에 NoteImage 인덱스 0~3중 랜덤으로 이미지 삽입
@@ -22,6 +23,7 @@ class NOTE:
         #--------노트 위치정보 -------------------------
         self.CenterX = 0.0     #노트 중심 x좌표
         self.CenterY = 0.0
+        self.PrevY =735.0
 
 
    # def SetImage(self):
@@ -41,7 +43,7 @@ class NOTE:
         pass
 
     def update(self):
-        pass
+        self.CenterY = 735 - self.distance
 
 
     def draw(self):

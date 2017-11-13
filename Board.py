@@ -46,15 +46,24 @@ class BOARD:
             self.KeyBox[num].isSelect = False
             BOARD.isKey_Down = False
 
-
     def update(self):
         pass
 
 
+    def SetIsHitTrue(self):
+        if BOARD.is_Hit is False:
+            BOARD.is_Hit = True
 
-    def draw(self,name):
+
+    def SetIsHitFalse(self):
+        if BOARD.is_Hit is True:
+            BOARD.is_Hit = False
+
+
+    def draw(self):
         self.boardImage.draw(self.BoardPosX,self.BoardPosY,self.BoardWidth,self.BoardHeight)
         self.stageImage.draw(self.StagePosX,self.StagePosY,self.StageSizeX,self.StageSizeY)
+
 
         if self.KeyBox !=None:
             for i in range(0,self.count):
@@ -63,6 +72,5 @@ class BOARD:
         if BOARD.isKey_Down == True:
             self.Hit_Effect.opacify(0.7)
             self.Hit_Effect.draw(self.Hit_Effect_PosX,self.Hit_Effect_PosY,self.Hit_Effect_Width,self.Hit_Effect_Height)
-
 
 

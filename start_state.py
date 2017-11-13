@@ -78,7 +78,7 @@ def update():
 
 def draw():
     global image,font,StartFont,board,name
-    board.draw(name)
+    board.draw()
 
     #image[0].draw(300,350)
     #image[1].draw(890,350)
