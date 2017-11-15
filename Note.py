@@ -42,6 +42,12 @@ class NOTE:
     def DelNote(self):
         pass
 
+    def Check_CrushBoard(self):
+        if self.CenterY - self.height <=0:
+            return True
+        else:
+            return False
+
     def update(self):
         self.CenterY = 735 - self.distance
 

@@ -48,7 +48,7 @@
     "46":{"Create_Sec":12, "Xpos":3,"Speed":1000.0},
     "47":{"Create_Sec":10, "Xpos":3,"Speed":1000.0},
     "48":{"Create_Sec":20, "Xpos":4,"Speed":1000.0},
-    "49":{"Create_Sec":14, "Xpdos":0,"Speed":1000.0},
+    "49":{"Create_Sec":14, "Xpos":0,"Speed":1000.0},
     "50":{"Create_Sec":10, "Xpos":0,"Speed":1000.0},
     "51":{"Create_Sec":19, "Xpos":1,"Speed":1000.0},
     "52":{"Create_Sec":21, "Xpos":4,"Speed":1000.0},
@@ -65,6 +65,13 @@
     "63":{"Create_Sec":15, "Xpos":3,"Speed":1000.0},
     "64":{"Create_Sec":22, "Xpos":4,"Speed":1000.0},
     "65":{"Create_Sec":20, "Xpos":2,"Speed":1000.0},
-    "66":{"Create_Sec":15, "Xpos":3,"Speed":1000.0}
+    "66":{"Create_Sec":15, "Xpos":3,"Speed":1000.0},
+    "67":{"Create_Sec":25, "Xpos":1,"Speed":1000.0},
+    "68":{"Create_Sec":13, "Xpos":3,"Speed":1000.0},
+    "69":{"Create_Sec":16, "Xpos":0,"Speed":1000.0},
+    "70":{"Create_Sec":19, "Xpos":1,"Speed":1000.0},
+    "71":{"Create_Sec":23, "Xpos":3,"Speed":1000.0},
+    "72":{"Create_Sec":20, "Xpos":3,"Speed":1000.0}
+
 
 }

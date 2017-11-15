@@ -41,10 +41,12 @@ class BOARD:
             self.Hit_Effect_PosX = 59+(num*self.Hit_Effect_Width)
 
 
-    def GiveKeyBoxUnSelect(self,num):                               #KeyBox 비활성화 함수
+    def GiveKeyBoxUnSelect(self,num,GameManager):                               #KeyBox 비활성화 함수
         if self.KeyBox[num] !=None:
             self.KeyBox[num].isSelect = False
             BOARD.isKey_Down = False
+
+
 
     def update(self):
         pass

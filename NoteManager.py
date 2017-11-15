@@ -26,35 +26,51 @@ class NoteManager:
             NoteManager.noteList = [NOTE(False) for i in range(0,count)]                            #count 만큼 일반노트 생성
             self.maxElementCount = count                                                            #최대 노트 개수를 count 값으로 세팅
 
-    def CheckCrushBoard(self):
-        for i in range(0,self.maxElementCount):
-            if NoteManager.noteList[i].CenterY<=0:               #note의 top이 0이하되면 노트 값 0
+    def Check_CrushBoard(self,GameManager):
+        for i in range(0,self.currentIndex):
+            if NoteManager.noteList[i].CenterY-self.noteList[i].height/2<=0:               #note의 top이 0이하되면 노트 값 0
                 NoteManager.noteList[i].isSelect = False
                 NoteManager.noteList[i].height =0
                 NoteManager.noteList[i].width =0
                 NoteManager.noteList[i].CenterX =0.0
                 NoteManager.noteList[i].CenterY =0.0
                 NoteManager.noteList[i].speed = 0
+                isHitZero = GameManager.SetZeroHitCount()
+                GameManager.isHit = False
+                if isHitZero is not 0:
+                    GameManager.MaxHitCount()
 
 
-    def CheckCrushKeyBox(self,board,index):
+    def CheckCrushKeyBox(self,board,GameManager,index):
         if board.KeyBox[index] != None:
             if board.KeyBox[index].isSelect == True:
-                for i in range(0,self.currentIndex):
-                    if self.noteList[i].CenterY-self.noteList[i].height/2 < board.KeyBox[index].CenterY+self.noteList[i].height/2 +50                 \
+                for i in range(self.currentElementCount-self.SelectElementCount,self.currentIndex):
+                    if self.noteList[i].CenterY-self.noteList[i].height/2 < board.KeyBox[index].CenterY+self.noteList[i].height/2 +100                 \
                     and self.noteList[i].CenterX-1 == board.KeyBox[index].CenterX:
                         self.SetElementUnselect(i)
                         self.SetNotePosZero(i)
+                        GameManager.HitCount()
+                        GameManager.HitTotalCount()
+                        GameManager.isHit =True
+                    elif self.noteList[i].Check_CrushBoard() is True:
+                        self.SetElementUnselect(i)
+                        self.SetNotePosZero(i)
+                        GameManager.isHit = False
+
+
+
+
+
 
 
 
 
 
     def SetElementSelect(self):
-        for i in range(0,self.maxElementCount):
+        for i in range(0,self.currentElementCount):
             NoteManager.noteList[i].isSelect = True
 
-        self.SelectElementCount = self.maxElementCount
+        self.SelectElementCount = self.currentElementCount
 
 
     def SetElementUnselect(self,index):

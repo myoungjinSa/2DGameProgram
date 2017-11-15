@@ -26,6 +26,7 @@ music_data = None
 music = SOUND()
 sound = None
 isStart = False
+
 GM = None
 #-----------------------------------------
 #               시간
@@ -50,7 +51,6 @@ def enter():
     #-------노트 생성 매니저 클래스 생성----
     note_manager = NoteManager()
     note_manager.CreateNoteList(300)
-    note_manager.SetElementSelect()
     #--------시간 경과-----------
     Current_Time = get_time()
     #---------------------------
@@ -70,6 +70,8 @@ def enter():
     #------게임 매니저 변수 초기화---------
     GM = GameManager()
 
+    #-----------------------------------
+
 
 
 
@@ -88,7 +90,7 @@ def resume():
 
 
 def handle_events():
-    global Key_Status,board,note_manager,music
+    global Key_Status,board,note_manager,music,GM
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -97,29 +99,35 @@ def handle_events():
             game_framework.quit()
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_a):
             board.GiveKeyBoxSelect(0)
-            note_manager.CheckCrushKeyBox(board,0)
+            note_manager.CheckCrushKeyBox(board,GM,0)
+
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_s):
             board.GiveKeyBoxSelect(1)
-            note_manager.CheckCrushKeyBox(board,1)
+            note_manager.CheckCrushKeyBox(board,GM,1)
+
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_d):
             board.GiveKeyBoxSelect(2)
-            note_manager.CheckCrushKeyBox(board,2)
+            note_manager.CheckCrushKeyBox(board,GM,2)
+
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_f):
             board.GiveKeyBoxSelect(3)
-            note_manager.CheckCrushKeyBox(board,3)
+            note_manager.CheckCrushKeyBox(board,GM,3)
+
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_RETURN):
             board.GiveKeyBoxSelect(4)
-            note_manager.CheckCrushKeyBox(board,4)
+            note_manager.CheckCrushKeyBox(board,GM,4)
+
         elif event.type == SDL_KEYUP:
             for i in range(0,5):
-                board.GiveKeyBoxUnSelect(i)
+                board.GiveKeyBoxUnSelect(i,GM)
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_q):
             music.StopMusic()
 
 
+
 def update():
     global music_time,note_manager,note_list,NoteCount,guitar_list,Current_Time
-    global music,isStart
+    global music,isStart,GM
     Frame_Time = get_time() - Current_Time
     Frame_Rate = 1.0 / Frame_Time
     print("Frame Rate : %f fps,Frame Time : %f sec,"%(Frame_Rate,Frame_Time))
@@ -133,17 +141,21 @@ def update():
     if music_time >=0.0:
         note_manager.NoteDown(Frame_Time)                     #각 노트의 속도대로 떨어트려라
 
+
     if music_time %8 ==0:                           #기타리스트 애니메이션 시간 간격
         guitar_list.update()
 
 
     delay(0.01)                   #0.01초 마다
     Current_Time += Frame_Time
-    music_time = music_time + 1
+    if isStart == True:
+        music_time = music_time + 1
+
+
 
 def draw():
     global music_time,board,note_manager,guitar_list,Frame_Rate,Frame_Time
-    global music_data
+    global music_data,GM
 
     count = note_manager.GetCurrentIndex()
     if isStart is True:
@@ -152,10 +164,14 @@ def draw():
          note_manager.SetNoteSpeed(music_data[str(note_manager.GetCurrentIndex())]["Speed"])             #노트 속도가 5이면 대략 맨 위에서 맨 아래까지 가는 시간은 2.25초
          note_manager.UpCurrentIndex()
          note_manager.UpCurrentElementCount()
+         note_manager.SetElementSelect()
          music_time = 0.0                                                                                #한번 if문에 들어오면 다시 music_time 초기화
     local_manager=note_manager.GetNoteList()
     clear_canvas()
     board.draw()
+    if isStart == True:
+        GM.draw()
+
     guitar_list.draw()
     print("Frame Rate : %f fps,Frame Time : %f sec," % (Frame_Rate, Frame_Time))
     for i in range(0,count):
