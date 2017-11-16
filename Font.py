@@ -14,6 +14,7 @@ class FONT:
         self.image = Image
         self.total =0
         self.HitFont = None
+        self.NumFont=None
 
     def SetImage(self,name):
         self.image = load_image(name)

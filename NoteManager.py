@@ -3,7 +3,6 @@ from Note import *
 from main_state import *
 from Board import *
 
-
 class NoteManager:
     noteList = None
 
@@ -26,22 +25,10 @@ class NoteManager:
             NoteManager.noteList = [NOTE(False) for i in range(0,count)]                            #count 만큼 일반노트 생성
             self.maxElementCount = count                                                            #최대 노트 개수를 count 값으로 세팅
 
-    def Check_CrushBoard(self,GameManager):
-        for i in range(0,self.currentIndex):
-            if NoteManager.noteList[i].CenterY-self.noteList[i].height/2<=0:               #note의 top이 0이하되면 노트 값 0
-                NoteManager.noteList[i].isSelect = False
-                NoteManager.noteList[i].height =0
-                NoteManager.noteList[i].width =0
-                NoteManager.noteList[i].CenterX =0.0
-                NoteManager.noteList[i].CenterY =0.0
-                NoteManager.noteList[i].speed = 0
-                isHitZero = GameManager.SetZeroHitCount()
-                GameManager.isHit = False
-                if isHitZero is not 0:
-                    GameManager.MaxHitCount()
 
 
     def CheckCrushKeyBox(self,board,GameManager,index):
+        global boolean
         if board.KeyBox[index] != None:
             if board.KeyBox[index].isSelect == True:
                 for i in range(self.currentElementCount-self.SelectElementCount,self.currentIndex):
@@ -51,11 +38,9 @@ class NoteManager:
                         self.SetNotePosZero(i)
                         GameManager.HitCount()
                         GameManager.HitTotalCount()
+                        boolean =True
                         GameManager.isHit =True
-                    elif self.noteList[i].Check_CrushBoard() is True:
-                        self.SetElementUnselect(i)
-                        self.SetNotePosZero(i)
-                        GameManager.isHit = False
+                        return boolean
 
 
 

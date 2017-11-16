@@ -26,7 +26,7 @@ music_data = None
 music = SOUND()
 sound = None
 isStart = False
-
+boolean =False
 GM = None
 #-----------------------------------------
 #               시간
@@ -90,7 +90,7 @@ def resume():
 
 
 def handle_events():
-    global Key_Status,board,note_manager,music,GM
+    global Key_Status,board,note_manager,music,GM,boolean
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -99,23 +99,23 @@ def handle_events():
             game_framework.quit()
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_a):
             board.GiveKeyBoxSelect(0)
-            note_manager.CheckCrushKeyBox(board,GM,0)
+            boolean=note_manager.CheckCrushKeyBox(board,GM,0)
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_s):
             board.GiveKeyBoxSelect(1)
-            note_manager.CheckCrushKeyBox(board,GM,1)
+            boolean=note_manager.CheckCrushKeyBox(board,GM,1)
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_d):
             board.GiveKeyBoxSelect(2)
-            note_manager.CheckCrushKeyBox(board,GM,2)
+            boolean=note_manager.CheckCrushKeyBox(board,GM,2)
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_f):
             board.GiveKeyBoxSelect(3)
-            note_manager.CheckCrushKeyBox(board,GM,3)
+            boolean =note_manager.CheckCrushKeyBox(board,GM,3)
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_RETURN):
             board.GiveKeyBoxSelect(4)
-            note_manager.CheckCrushKeyBox(board,GM,4)
+            boolean=note_manager.CheckCrushKeyBox(board,GM,4)
 
         elif event.type == SDL_KEYUP:
             for i in range(0,5):
@@ -127,7 +127,7 @@ def handle_events():
 
 def update():
     global music_time,note_manager,note_list,NoteCount,guitar_list,Current_Time
-    global music,isStart,GM
+    global music,isStart,GM,boolean
     Frame_Time = get_time() - Current_Time
     Frame_Rate = 1.0 / Frame_Time
     print("Frame Rate : %f fps,Frame Time : %f sec,"%(Frame_Rate,Frame_Time))
@@ -140,6 +140,11 @@ def update():
 
     if music_time >=0.0:
         note_manager.NoteDown(Frame_Time)                     #각 노트의 속도대로 떨어트려라
+
+
+    if music_time >=30:
+        boolean = False
+
 
 
     if music_time %8 ==0:                           #기타리스트 애니메이션 시간 간격
@@ -155,7 +160,7 @@ def update():
 
 def draw():
     global music_time,board,note_manager,guitar_list,Frame_Rate,Frame_Time
-    global music_data,GM
+    global music_data,GM,boolean
 
     count = note_manager.GetCurrentIndex()
     if isStart is True:
@@ -170,7 +175,9 @@ def draw():
     clear_canvas()
     board.draw()
     if isStart == True:
-        GM.draw()
+        GM.draw(boolean)
+
+
 
     guitar_list.draw()
     print("Frame Rate : %f fps,Frame Time : %f sec," % (Frame_Rate, Frame_Time))

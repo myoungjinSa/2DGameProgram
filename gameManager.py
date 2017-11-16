@@ -9,11 +9,15 @@ class GameManager:
         self.HitMax =0             #실패하지않고 최대 히트한수
         self.HitTotal =0           #총 히트수
         self.pRevHit =0             #0으로 세팅되기전 hit수를 담는 변수
-        self.font = FONT()
+        self.font = FONT()          #글자 출력 폰트
+        self.Numfont =FONT()        #히트 수 출력 폰트
         self.font.SetFontPos(300,500)
         self.font.SetFontWH(200,100)
         if self.font.HitFont == None:
             self.font.HitFont = [load_image("HIT_Font.png"),load_image("miss.png")]
+            self.Numfont.NumFont = [load_image("Num_1.png"),load_image("Num_2.png"),load_image("Num_3.png"),load_image("Num_4.png"),load_image("Num_5.png"),load_image("Num_6.png"),load_image("Num_7.png")\
+            ,load_image("Num_8.png"),load_image("Num_9.png")]
+
 
         self.isHit = False
 
@@ -73,11 +77,13 @@ class GameManager:
             self.hitcount =0
 
 
-    def draw(self):
-        if self.isHit == True:
-            self.font.HitFont[0].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
-        elif self.isHit==False:
-            self.font.HitFont[1].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
-
+    def draw(self,boolean):
+        if boolean ==True:
+            if self.isHit == True:
+                self.font.HitFont[0].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
+            elif self.isHit==False:
+                self.font.HitFont[1].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
+        else:
+            pass
 
 
