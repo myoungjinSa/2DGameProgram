@@ -111,7 +111,7 @@ def handle_events():
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_f):
             board.GiveKeyBoxSelect(3)
-            boolean =note_manager.CheckCrushKeyBox(board,GM,3)
+            boolean=note_manager.CheckCrushKeyBox(board,GM,3)
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_RETURN):
             board.GiveKeyBoxSelect(4)
@@ -123,11 +123,10 @@ def handle_events():
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_q):
             music.StopMusic()
 
-
-
+total_time=0
 def update():
     global music_time,note_manager,note_list,NoteCount,guitar_list,Current_Time
-    global music,isStart,GM,boolean
+    global music,isStart,GM,boolean,total_time,board
     Frame_Time = get_time() - Current_Time
     Frame_Rate = 1.0 / Frame_Time
     print("Frame Rate : %f fps,Frame Time : %f sec,"%(Frame_Rate,Frame_Time))
@@ -140,11 +139,15 @@ def update():
 
     if music_time >=0.0:
         note_manager.NoteDown(Frame_Time)                     #각 노트의 속도대로 떨어트려라
+        note_manager.CheckCrushBoard(board,GM)
 
-
-    if music_time >=30:
-        boolean = False
-
+    if boolean ==True:
+        total_time =0
+    else:
+        if total_time >= 200:
+            boolean = False
+            total_time =0
+    total_time += 1
 
 
     if music_time %8 ==0:                           #기타리스트 애니메이션 시간 간격
@@ -162,13 +165,12 @@ def draw():
     global music_time,board,note_manager,guitar_list,Frame_Rate,Frame_Time
     global music_data,GM,boolean
 
-    count = note_manager.GetCurrentIndex()
+    select = note_manager.GetSelectElementCount()
+    unselect = note_manager.GetUnselectElementCount()
     if isStart is True:
-        if music_time % music_data[str(note_manager.GetCurrentIndex())]["Create_Sec"] == 0.0 :              #0.1초마다
-         note_manager.SetNotePos(music_data[str(note_manager.GetCurrentIndex())]["Xpos"])
-         note_manager.SetNoteSpeed(music_data[str(note_manager.GetCurrentIndex())]["Speed"])             #노트 속도가 5이면 대략 맨 위에서 맨 아래까지 가는 시간은 2.25초
-         note_manager.UpCurrentIndex()
-         note_manager.UpCurrentElementCount()
+        if music_time % music_data[str(note_manager.GetSelectElementCount())]["Create_Sec"] == 0.0 :              #0.1초마다
+         note_manager.SetNotePos(music_data[str(note_manager.GetSelectElementCount())]["Xpos"])
+         note_manager.SetNoteSpeed(music_data[str(note_manager.GetSelectElementCount())]["Speed"])             #노트 속도가 5이면 대략 맨 위에서 맨 아래까지 가는 시간은 2.25초
          note_manager.SetElementSelect()
          music_time = 0.0                                                                                #한번 if문에 들어오면 다시 music_time 초기화
     local_manager=note_manager.GetNoteList()
@@ -180,8 +182,8 @@ def draw():
 
 
     guitar_list.draw()
-    print("Frame Rate : %f fps,Frame Time : %f sec," % (Frame_Rate, Frame_Time))
-    for i in range(0,count):
+    #print("Frame Rate : %f fps,Frame Time : %f sec," % (Frame_Rate, Frame_Time))
+    for i in range(unselect,select):
         if local_manager[i].isSelect is True:
             local_manager[i].draw()
 

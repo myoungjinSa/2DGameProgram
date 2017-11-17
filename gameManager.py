@@ -2,7 +2,9 @@ from pico2d import *
 from Font import *
 
 class GameManager:
-
+    one_digit =0
+    ten_digit =0
+    hundred_digit =0
     def __init__(self):
         self.level = ["Level_One","Level_Two","Level_Three"]
         self.hitcount =0          #히트 카운트 변수
@@ -10,12 +12,19 @@ class GameManager:
         self.HitTotal =0           #총 히트수
         self.pRevHit =0             #0으로 세팅되기전 hit수를 담는 변수
         self.font = FONT()          #글자 출력 폰트
-        self.Numfont =FONT()        #히트 수 출력 폰트
-        self.font.SetFontPos(300,500)
-        self.font.SetFontWH(200,100)
+        self.Numfont =[FONT() for i in range(3)]        #히트 수 출력 폰트
+        self.font.SetFontPos(320,500)
+        self.font.SetFontWH(200,75)
+        self.Numfont[0].SetFontPos(300,400)
+        self.Numfont[0].SetFontWH(100,100)
+        self.Numfont[1].SetFontPos(250,400)
+        self.Numfont[1].SetFontWH(100,100)
+        self.Numfont[2].SetFontPos(150,400)
+        self.Numfont[2].SetFontWH(100,100)
         if self.font.HitFont == None:
             self.font.HitFont = [load_image("HIT_Font.png"),load_image("miss.png")]
-            self.Numfont.NumFont = [load_image("Num_1.png"),load_image("Num_2.png"),load_image("Num_3.png"),load_image("Num_4.png"),load_image("Num_5.png"),load_image("Num_6.png"),load_image("Num_7.png")\
+            for i in range(0,2):
+                self.Numfont[i].NumFont = [load_image("Num_0.png"),load_image("Num_1.png"),load_image("Num_2.png"),load_image("Num_3.png"),load_image("Num_4.png"),load_image("Num_5.png"),load_image("Num_6.png"),load_image("Num_7.png")\
             ,load_image("Num_8.png"),load_image("Num_9.png")]
 
 
@@ -81,6 +90,17 @@ class GameManager:
         if boolean ==True:
             if self.isHit == True:
                 self.font.HitFont[0].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
+                if self.hitcount < 10:
+                    self.Numfont[0].NumFont[self.hitcount].draw(self.Numfont[0].x,self.Numfont[0].y,self.Numfont[0].FontWidth,self.Numfont[0].FontHeight)
+                if self.hitcount>=10 and self.hitcount <100:
+                    GameManager.ten_digit = self.hitcount/10
+                    self.Numfont[0].NumFont[self.hitcount%10].draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
+                    self.Numfont[1].NumFont[int(GameManager.ten_digit)].draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth, self.Numfont[1].FontHeight)
+                if self.hitcount >=100 and self.hitcount <1000:
+                    GameManager.hundred_digit = self.hitcount/100
+                    self.Numfont[0].NumFont[self.hitcount % 10].draw(self.Numfont[0].x, self.Numfont[0].y, self.Numfont[0].FontWidth,self.Numfont[0].FontHeight)
+                    self.Numfont[1].NumFont[int(GameManager.ten_digit)].draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
+                    self.Numfont[2].NumFont[int(GameManager.hundred_digit)].draw(self.Numfont[2].x, self.Numfont[2].y,self.Numfont[2].FontWidth,self.Numfont[2].FontHeight)
             elif self.isHit==False:
                 self.font.HitFont[1].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
         else:

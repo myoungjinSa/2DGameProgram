@@ -4,7 +4,7 @@ import random
 
 class NOTE:
     index =0                                                                    #KeyBox 이미지 삽입시 나머지 연산에 쓰일 클래스 변수
-    NoteImage= ["note_blue.png","note_red.png","note_grey.png","note_pink.png","note_orange.png"]
+    NoteImage= ["note_blue.png","note_red.png","note_grass.png","note_pink.png","note_orange.png"]
     KeyBoxImage = {0: 'keyBox_Dark.png', 1: 'keyBox_Green.png', 2: 'keyBox_HotPink.png', 3: 'keyBox_Sand.png',4: 'keyBox_Sea.png'}
     def __init__(self,bool):                            #bool 값이 False 이면 일반 노트이미지를 로드하며 True 이면 KeyBox 이미지를 로드한다.
         self.width = 120        #노트 너비
