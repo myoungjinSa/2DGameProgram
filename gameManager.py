@@ -36,6 +36,8 @@ class GameManager:
         self.level = level
 
 
+    def CheckHitCount(self):
+        return self.hitcount
 
     def GetHitCount(self):
         return self.hitcount

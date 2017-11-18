@@ -17,6 +17,7 @@ music_time =0.0
 note_manager = None
 NoteCount =False
 guitar_list = None
+spectator =None
 Key_Status = {0:"SDLK_a",1:"SDLK_s",2:"SDLK_d",3:"SDLK_f",4:"SDLK_RETURN"}
 Distance = 0.0
 Current_Time = 0.0
@@ -45,6 +46,7 @@ def enter():
     global guitar_list,Current_Time
     global music,music_data
     global GM
+    global spectator
     #-------보드 위치 세팅----------------
     board = BOARD()
     board.CreateKeyBox()
@@ -57,6 +59,13 @@ def enter():
     #       기타리스트 객체 생성 후 위치 세팅
     guitar_list = GuitarList()
     guitar_list.SetPosition(800,100)
+    spectator = [Spectator(i) for i in range(0,Spectator.total_count)]
+
+
+
+    spectator[0].SetPosition(900,600)
+    spectator[1].SetPosition(900,600)
+    spectator[2].SetPosition(900,600)
     #-------------------------------------
     #       음악 재생
     music.SetMusic("Shape_of_you.mp3")
@@ -126,20 +135,25 @@ def handle_events():
 total_time=0
 def update():
     global music_time,note_manager,note_list,NoteCount,guitar_list,Current_Time
-    global music,isStart,GM,boolean,total_time,board
+    global music,isStart,GM,boolean,total_time,board,spectator
     Frame_Time = get_time() - Current_Time
     Frame_Rate = 1.0 / Frame_Time
     print("Frame Rate : %f fps,Frame Time : %f sec,"%(Frame_Rate,Frame_Time))
 
     if isStart ==False:                                     #초반 게임이 시작되고 3초정도 딜레이시간을 가진다
-        delay(2.5)
-        music.PlayMusic()                                   #3초 정도 딜레이 후 음악 재생
+        delay(1.0)
         isStart = True
+        music.PlayMusic()                                   #3초 정도 딜레이 후 음악 재생
+
 
 
     if music_time >=0.0:
         note_manager.NoteDown(Frame_Time)                     #각 노트의 속도대로 떨어트려라
         note_manager.CheckCrushBoard(board,GM)
+        hit=GM.CheckHitCount()
+        for i in range(0,Spectator.total_count):
+            spectator[i].SetShowFlagTrue(hit)
+
 
     if boolean ==True:
         total_time =0
@@ -152,7 +166,9 @@ def update():
 
     if music_time %8 ==0:                           #기타리스트 애니메이션 시간 간격
         guitar_list.update()
-
+        for i in range(0,Spectator.total_count):
+            if spectator[i].GetShowFlag() == True:
+                spectator[i].update(board,i,spectator)
 
     delay(0.01)                   #0.01초 마다
     Current_Time += Frame_Time
@@ -163,7 +179,7 @@ def update():
 
 def draw():
     global music_time,board,note_manager,guitar_list,Frame_Rate,Frame_Time
-    global music_data,GM,boolean
+    global music_data,GM,boolean,spectator
 
     select = note_manager.GetSelectElementCount()
     unselect = note_manager.GetUnselectElementCount()
@@ -182,6 +198,8 @@ def draw():
 
 
     guitar_list.draw()
+    for i in range(0,Spectator.total_count):
+        spectator[i].draw()
     #print("Frame Rate : %f fps,Frame Time : %f sec," % (Frame_Rate, Frame_Time))
     for i in range(unselect,select):
         if local_manager[i].isSelect is True:
