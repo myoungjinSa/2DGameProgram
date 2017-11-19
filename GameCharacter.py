@@ -32,8 +32,10 @@ class GuitarList:
 
 
 class Spectator:
-    Spectator_Image_list =[("Boy_front_1.png","Boy_front_2.png","Boy_front_3.png"),("Boy2_front_1.png","Boy2_front_2.png","Boy2_front_2.png"),("Boy3_front_1.png","Boy3_front_2.png","Boy3_front_3.png")]
-    total_count = 3
+    Spectator_Image_list =[("Boy_front_1.png","Boy_front_2.png","Boy_front_3.png"),("Boy2_front_1.png","Boy2_front_2.png","Boy2_front_2.png"),
+                           ("Boy3_front_1.png","Boy3_front_2.png","Boy3_front_3.png"),("Boy4_front_1.png","Boy4_front_2.png","Boy4_front_3.png")]
+
+    total_count = 4
 
     def __init__(self,index):
         self.positionX,self.positionY =0.0 , 0.0
@@ -41,7 +43,7 @@ class Spectator:
         self.width = 63
         self.height= 68
         self.index = index
-        self.image = [load_image(Spectator.Spectator_Image_list[index][i]) for i in range(0,Spectator.total_count)]
+        self.image = [load_image(Spectator.Spectator_Image_list[index][i]) for i in range(0,3)]
         self.isShow = False
 
 
@@ -65,7 +67,7 @@ class Spectator:
                 if self.CmpPositionY(200) == True:
                     self.positionY -= 5
 
-            if index==1 or index==2:
+            if index==1 or index==2 or index ==3:
                 if self.CmpPositionX(spectator[index-1].GetPositionX())==True:
                     self.positionX-=5
                 else:
@@ -107,6 +109,10 @@ class Spectator:
                 if self.isShow is False:
                     self.isShow =True
 
+        if self.index ==3:
+            if hit >15:
+                if self.isShow is False:
+                    self.isShow =True
 
 
     def GetShowFlag(self):

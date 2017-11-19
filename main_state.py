@@ -66,6 +66,7 @@ def enter():
     spectator[0].SetPosition(900,600)
     spectator[1].SetPosition(900,600)
     spectator[2].SetPosition(900,600)
+    spectator[3].SetPosition(900,600)
     #-------------------------------------
     #       음악 재생
     music.SetMusic("Shape_of_you.mp3")
