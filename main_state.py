@@ -86,7 +86,12 @@ def enter():
 
 
 def exit():
-    pass
+    del(music)
+    del(note_manager)
+    del(guitar_list)
+    del(GM)
+    del(board)
+
 
 
 def pause():
