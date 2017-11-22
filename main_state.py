@@ -86,6 +86,7 @@ def enter():
 
 
 def exit():
+    global music,note_manager,guitar_list,GM,board
     del(music)
     del(note_manager)
     del(guitar_list)
@@ -145,9 +146,12 @@ def update():
     print("Frame Rate : %f fps,Frame Time : %f sec,"%(Frame_Rate,Frame_Time))
 
     if isStart ==False:                                     #초반 게임이 시작되고 3초정도 딜레이시간을 가진다
-        delay(1.0)
+        music_time +=1
+
+        delay(0.1)
         isStart = True
         music.PlayMusic()                                   #3초 정도 딜레이 후 음악 재생
+
 
 
 

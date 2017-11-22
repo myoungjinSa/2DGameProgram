@@ -1,5 +1,5 @@
 {
-    "0":{"Create_Sec":2,"Xpos":0,"Speed":1500.0},
+    "0":{"Create_Sec":5,"Xpos":0,"Speed":1500.0},
     "1":{"Create_Sec":15,"Xpos":2 ,"Speed":1500.0},
     "2":{"Create_Sec":13,"Xpos":1,"Speed":1500.0},
     "3":{"Create_Sec":13, "Xpos":3,"Speed":1500.0},
@@ -13,7 +13,7 @@
     "11":{"Create_Sec":13, "Xpos":4,"Speed":1500.0},
     "12":{"Create_Sec":15, "Xpos":2,"Speed":1500.0},
     "13":{"Create_Sec":13, "Xpos":3,"Speed":1500.0},
-    "14":{"Create_Sec":20, "Xpos":0,"Speed":1000.0},
+    "14":{"Create_Sec":20, "Xpos":0,"Speed":1500.0},
     "15":{"Create_Sec":15, "Xpos":3,"Speed":1000.0},
     "16":{"Create_Sec":10, "Xpos":2,"Speed":1000.0},
     "17":{"Create_Sec":15, "Xpos":1,"Speed":1000.0},
