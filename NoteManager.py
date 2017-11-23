@@ -3,6 +3,7 @@ from Note import *
 from main_state import *
 from Board import *
 
+
 class NoteManager:
     noteList = None
 
@@ -12,6 +13,7 @@ class NoteManager:
         self.currentIndex = 0
         self.UnselectCount = 0
         self.SelectElementCount =0
+
         if NoteManager.noteList ==None:
             NoteManager.noteList = [NOTE(False)]                                                    #일반 노트 생성
 
@@ -30,6 +32,12 @@ class NoteManager:
             NoteManager.noteList = [NOTE(False) for i in range(0,count)]                            #count 만큼 일반노트 생성
             self.maxElementCount = count                                                            #최대 노트 개수를 count 값으로 세팅
 
+
+    def CheckIsEnd(self):
+        if self.SelectElementCount>=10:                                                            #273
+            return True
+        else:
+            return False
 
 
     def CheckCrushKeyBox(self,board,GameManager,index):
@@ -61,20 +69,6 @@ class NoteManager:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     def SetElementSelect(self):
         NoteManager.noteList[self.SelectElementCount].isSelect = True
 
@@ -93,7 +87,9 @@ class NoteManager:
                                                                                                                                                                     #따라서 노트의 절반을 이동 시킨후 xpos의 값과 노트의 width를 곱해서
                                                                                                                                                                     #노트의 위치를 설정하게 된다.
             NoteManager.noteList[self.SelectElementCount].CenterY =735                                                                                                    #이미지의 가장 윗점 750 - Note.Height/2(15)  = 735
-
+        elif Xpos == -1:
+            NoteManager.noteList[self.SelectElementCount].CenterX =  -120
+            NoteManager.noteList[self.SelectElementCount].CetnerY = -30
 
     def NoteDown(self,Frame_Time):
         if self.SelectElementCount>=0:

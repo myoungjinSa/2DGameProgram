@@ -12,7 +12,7 @@ class GameManager:
         self.HitTotal =0           #총 히트수
         self.pRevHit =0             #0으로 세팅되기전 hit수를 담는 변수
         self.font = FONT()          #글자 출력 폰트
-        self.Numfont =[FONT() for i in range(3)]        #히트 수 출력 폰트
+        self.Numfont =[FONT() for i in range(0,3)]       #히트 수 출력 폰트
         self.font.SetFontPos(320,500)
         self.font.SetFontWH(200,75)
         self.Numfont[0].SetFontPos(300,400)
@@ -37,6 +37,9 @@ class GameManager:
 
 
     def CheckHitCount(self):
+        self.MaxHitCount()
+        self.HitTotalCount()
+
         return self.hitcount
 
     def GetHitCount(self):
@@ -52,14 +55,18 @@ class GameManager:
         else:
             self.HitMax = self.hitcount
 
+        return self.HitMax
+
 
     def TotalZero(self):        #총 히트수 초기화 해주는 함수
         self.HitTotal =0
 
+    def GetTotal(self):
+        return self.HitTotal
+
     def HitTotalCount(self):    #총 히트수 증가 함수
         self.HitTotal+=1
 
-        return self.HitTotal
 
     def HitCount(self):         #히트수 증가 함수
         self.hitcount +=1

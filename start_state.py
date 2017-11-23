@@ -68,7 +68,7 @@ def update():
 
     if mouseDown == True:
        # game_framework.quit()
-        game_framework.push_state(main_state)
+        game_framework.run(main_state)
 
     delay(0.01)
 

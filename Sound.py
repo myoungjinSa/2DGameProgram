@@ -23,6 +23,9 @@ class SOUND:
         if SOUND.music != None:
             SOUND.music.stop()
 
+    def RemoveMusic(self):
+        if SOUND.music !=None:
+            del(SOUND.music)
 
 
 
