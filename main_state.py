@@ -54,7 +54,7 @@ def enter():
     board.CreateKeyBox()
     #-------노트 생성 매니저 클래스 생성----
     note_manager = NoteManager()
-    note_manager.CreateNoteList(305)
+    note_manager.CreateNoteList(310)
     #--------시간 경과-----------
     Current_Time = get_time()
     #---------------------------

@@ -1,7 +1,7 @@
 from pico2d import *
 from Font import *
 import json
-
+from gameManager import *
 
 class GameInfoScreen:
     InfoImage = ["GameInfo_Animation_1.png","GameInfo_Animation_2.png","GameInfo_Animation_3.png","GameInfo_Animation_4.png"]
@@ -25,9 +25,9 @@ class GameInfoScreen:
                                        load_image("Num_6.png"), load_image("Num_7.png")  , load_image("Num_8.png"), load_image("Num_9.png")]
         self.Numfont[0].SetFontPos(650, 300)
         self.Numfont[0].SetFontWH(100, 100)
-        self.Numfont[1].SetFontPos(550, 400)
+        self.Numfont[1].SetFontPos(600, 300)
         self.Numfont[1].SetFontWH(100, 100)
-        self.Numfont[2].SetFontPos(450, 400)
+        self.Numfont[2].SetFontPos(550, 300)
         self.Numfont[2].SetFontWH(100, 100)
 
         self.max_Font_PosX,self.max_Font_PosY = 0.0,0.0
@@ -77,7 +77,16 @@ class GameInfoScreen:
         if self.maxHit <10:
             self.Numfont[0].NumFont[self.maxHit].draw(self.Numfont[0].x, self.Numfont[0].y, self.Numfont[0].FontWidth,
                                                         self.Numfont[0].FontHeight)
+        elif self.maxHit >=10 and self.maxHit <100 :
+            GameManager.ten_digit = self.maxHit / 10
+            self.Numfont[0].NumFont[self.maxHit % 10].draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
+            self.Numfont[1].NumFont[int(GameManager.ten_digit)].draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
 
+        elif self.maxHit >= 100 and self.maxHit < 1000:
+            GameManager.hundred_digit = self.maxHit / 100
+            self.Numfont[0].NumFont[self.maxHit % 10].draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
+            self.Numfont[1].NumFont[int(GameManager.ten_digit)].draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
+            self.Numfont[2].NumFont[int(GameManager.hundred_digit)].draw(self.Numfont[2].x, self.Numfont[2].y,self.Numfont[2].FontWidth,self.Numfont[2].FontHeight)
 
 
 

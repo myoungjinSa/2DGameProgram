@@ -9,7 +9,6 @@ infoScreen = None
 
 def enter():
     global infoScreen,GM
-    open_canvas(1160,750)
     infoScreen = GameInfoScreen()
 
     infoScreen.SetInfoScreenWH(1180,760)
@@ -25,7 +24,7 @@ def resume():
 
 
 def exit():
-    close_canvas()
+    pass
 
 
 def pause():
