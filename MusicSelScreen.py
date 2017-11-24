@@ -11,6 +11,9 @@ class MusicSelScreen:
         self.curMusic = 0
 
 
+    def GetCurrentMusic(self):
+        return self.curMusic
+
     def SetDrawPosX(self,x,y):
         self.drawX = x
         self.drawY = y
@@ -28,12 +31,16 @@ class MusicSelScreen:
     def handle_events(self):
         pass
 
-    def update(self):
-        self.curMusic = (self.curMusic+1) %3
-        self.curImage = load_image(MusicSelScreen.Sel_image[self.curMusic])
+    def update(self,direction):
+        if direction == "right":
+            self.curMusic = (self.curMusic+1) %3
+            self.curImage = load_image(MusicSelScreen.Sel_image[self.curMusic])
+        elif direction == "left":
+            self.curMusic = (self.curMusic-1)%3
+            self.curImage = load_image(MusicSelScreen.Sel_image[self.curMusic])
 
     def draw(self):
-        self.curImage.draw(570,350)
+        self.curImage.draw(580,375)
 
 
 

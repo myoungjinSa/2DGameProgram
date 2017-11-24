@@ -3,7 +3,7 @@ from pico2d import *
 import main_state
 import Font
 import Board
-
+import MusicSelState
 
 
 
@@ -68,7 +68,7 @@ def update():
 
     if mouseDown == True:
        # game_framework.quit()
-        game_framework.run(main_state)
+        game_framework.run(MusicSelState)
 
     delay(0.01)
 

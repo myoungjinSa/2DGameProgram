@@ -4,6 +4,6 @@ import Custom
 import GameInfoState
 import MusicSelState
 
-game_framework.run(MusicSelState)
+game_framework.run(start_state)
 
 # fill here

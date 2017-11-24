@@ -69,7 +69,12 @@ def enter():
 
     #-------------------------------------
     #       음악 재생
-    music.SetMusic("Shape_of_you.mp3")
+
+    readFile = open("SelMusic.txt","r")
+    music_Num = json.load(readFile)
+    readFile.close()
+
+    music.SetMusic(int(music_Num))                                               # SOUND.music_list = ["Shape_of_you.mp3","Han_ol_meet_on_spring.mp3","Bol_bbalgan_Blue.mp3"]
     #-------------------------------------
     #------음악 관련 데이타 불러오기---------
     text_data_file = open("Shape_of_you_data.txt",'r')
