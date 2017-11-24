@@ -38,7 +38,6 @@ class GameManager:
 
     def CheckHitCount(self):
         self.MaxHitCount()
-        self.HitTotalCount()
 
         return self.hitcount
 
@@ -72,8 +71,6 @@ class GameManager:
         self.hitcount +=1
 
 
-    def ShowGameResult(self):
-        pass
 
     def SetMusicStatus(self,num):      #음악
         pass

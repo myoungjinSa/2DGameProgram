@@ -79,6 +79,7 @@ def enter():
     #------------------------------------
     #------게임 매니저 변수 초기화---------
     GM = GameManager()
+    GM.TotalZero()
 
     #-----------------------------------
 
@@ -167,6 +168,7 @@ def update():
             max_total.write(str(GM.GetTotal()))
             max_total.write("]")
             max_total.close()
+            GM.TotalZero()
             game_framework.run(GameInfoState)
         else:
             note_manager.NoteDown(Frame_Time)                     #각 노트의 속도대로 떨어트려라
