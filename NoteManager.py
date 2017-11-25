@@ -41,11 +41,10 @@ class NoteManager:
 
 
     def CheckCrushKeyBox(self,board,GameManager,index):
-        global boolean
         if board.KeyBox[index] != None:
             if board.KeyBox[index].isSelect == True:
                 for i in range(self.UnselectCount-1,self.SelectElementCount-1):
-                    if self.noteList[i].isSelect ==True  and self.noteList[i].CenterY-self.noteList[i].height/2 < board.KeyBox[index].CenterY+self.noteList[i].height/2 +120                \
+                    if self.noteList[i].isSelect ==True  and self.noteList[i].CenterY-self.noteList[i].height/2 < board.KeyBox[index].CenterY+self.noteList[i].height/2 +180                \
                     and self.noteList[i].CenterX-1 == board.KeyBox[index].CenterX:
                         self.SetElementUnselect(i)
                         self.SetNotePosZero(i)

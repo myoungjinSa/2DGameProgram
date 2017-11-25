@@ -20,6 +20,7 @@ note_manager = None
 NoteCount =False
 guitar_list = None
 spectator =None
+file_list =["Shape_of_you_data.txt","meet_on_spring.txt"]
 Key_Status = {0:"SDLK_a",1:"SDLK_s",2:"SDLK_d",3:"SDLK_f",4:"SDLK_RETURN"}
 Distance = 0.0
 Current_Time = 0.0
@@ -49,6 +50,7 @@ def enter():
     global music,music_data
     global GM
     global spectator
+    global file_list
     #-------보드 위치 세팅----------------
     board = BOARD()
     board.CreateKeyBox()
@@ -77,7 +79,7 @@ def enter():
     music.SetMusic(int(music_Num))                                               # SOUND.music_list = ["Shape_of_you.mp3","Han_ol_meet_on_spring.mp3","Bol_bbalgan_Blue.mp3"]
     #-------------------------------------
     #------음악 관련 데이타 불러오기---------
-    text_data_file = open("Shape_of_you_data.txt",'r')
+    text_data_file = open(file_list[music_Num],'r')
     music_data = json.load(text_data_file)
     text_data_file.close()
 
@@ -154,15 +156,16 @@ def update():
     print("Frame Rate : %f fps,Frame Time : %f sec,"%(Frame_Rate,Frame_Time))
 
     if isStart ==False:                                     #초반 게임이 시작되고 3초정도 딜레이시간을 가진다
-        music_time +=1
+        #music_time +=1
 
         delay(0.1)
         isStart = True
-        music.PlayMusic()                                   #3초 정도 딜레이 후 음악 재생
-
+        music.PlayMusic()                                   #1초 정도 딜레이 후 음악 재생
+        music.SetTickStart()
 
     if music_time >=0.0:
-        if note_manager.CheckIsEnd() ==True:
+        music.SetTickEnd()                                      #끝 시간 체크
+        if music.CheckMusicTime() ==True:
             isStart = False
             music_data =None
             music.RemoveMusic()
@@ -185,6 +188,7 @@ def update():
 
 
             if boolean ==True:
+                pass
                 total_time =0
             else:
                 if total_time >= 200:
@@ -198,6 +202,7 @@ def update():
                 for i in range(0,Spectator.total_count):
                     if spectator[i].GetShowFlag() == True:
                         spectator[i].update(board,i,spectator)
+
 
             delay(0.01)                   #0.01초 마다
             Current_Time += Frame_Time
