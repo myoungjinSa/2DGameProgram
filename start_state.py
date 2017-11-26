@@ -39,7 +39,7 @@ def SetPosition(font,startFont,x,y):
 
 def enter():
     global image,font,board,name
-    open_canvas(1160,750,True)
+    open_canvas(1160,750)
     #board.boardImage = load_image('Board.png')
     #image = [load_image('Board.png'),load_image("stage_bitmap.png")]
     j =0
