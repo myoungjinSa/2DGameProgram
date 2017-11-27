@@ -22,10 +22,11 @@ class GameManager:
         self.Numfont[2].SetFontPos(150,400)
         self.Numfont[2].SetFontWH(100,100)
         if self.font.HitFont == None:
-            self.font.HitFont = [load_image("HIT_Font.png"),load_image("miss.png")]
+            self.font.HitFont = [load_image("Resource\HIT_Font.png"),load_image("Resource\miss.png")]
             for i in range(0,2):
-                self.Numfont[i].NumFont = [load_image("Num_0.png"),load_image("Num_1.png"),load_image("Num_2.png"),load_image("Num_3.png"),load_image("Num_4.png"),load_image("Num_5.png"),load_image("Num_6.png"),load_image("Num_7.png")\
-            ,load_image("Num_8.png"),load_image("Num_9.png")]
+                self.Numfont[i].NumFont = [load_image("Resource\Zero.png"),load_image("Resource\One.png"),load_image("Resource\Two.png"),
+                                           load_image("Resource\Three.png"),load_image("Resource\Four.png"),load_image("Resource\Five.png"),load_image("Resource\Six.png"),
+                                           load_image("Resource\Seven.png"),load_image("Resource\Eight.png"),load_image("Resource\_Nine.png")]
 
 
         self.isHit = False
@@ -57,7 +58,7 @@ class GameManager:
         return self.HitMax
 
 
-    def TotalZero(self):        #총 히트수 초기화 해주는 함수
+    def SetTotalCountZero(self):        #총 히트수 초기화 해주는 함수
         self.HitTotal =0
 
     def GetTotal(self):
@@ -108,8 +109,8 @@ class GameManager:
                     self.Numfont[1].NumFont[int(GameManager.ten_digit)].draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
                     self.Numfont[2].NumFont[int(GameManager.hundred_digit)].draw(self.Numfont[2].x, self.Numfont[2].y,self.Numfont[2].FontWidth,self.Numfont[2].FontHeight)
             elif self.isHit==False:
-                #self.font.HitFont[1].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
-                pass
+                self.font.HitFont[1].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
+          #      pass
         else:
             pass
 

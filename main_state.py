@@ -20,18 +20,16 @@ note_manager = None
 NoteCount =False
 guitar_list = None
 spectator =None
-file_list =["Shape_of_you_data.txt","meet_on_spring.txt"]
+file_list =["Text\Shape_of_you_data.txt","Text\meet_on_spring.txt"]
 Key_Status = {0:"SDLK_a",1:"SDLK_s",2:"SDLK_d",3:"SDLK_f",4:"SDLK_RETURN"}
 Distance = 0.0
-Current_Time = 0.0
-Frame_Time = 0.0
-Frame_Rate = 0.0
+total_time = 0
 music_data = None
 music = SOUND()
 sound = None
 isStart = False
-boolean =False
-GM = None
+ShowHitImageFlag =False
+gameManager = None
 #-----------------------------------------
 #               시간
 #보드의 세로 높이는     750
@@ -48,11 +46,11 @@ def enter():
     global board,note_manager,note_list
     global guitar_list,Current_Time
     global music,music_data
-    global GM
+    global gameManager
     global spectator
     global file_list
     #-------보드 위치 세팅----------------
-    board = BOARD()
+    board = Board()
     board.CreateKeyBox()
     #-------노트 생성 매니저 클래스 생성----
     note_manager = NoteManager()
@@ -61,7 +59,7 @@ def enter():
     Current_Time = get_time()
     #---------------------------
     #       기타리스트 객체 생성 후 위치 세팅
-    guitar_list = GuitarList()
+    guitar_list = Guitarlist()
     guitar_list.SetPosition(800,100)
     spectator = [Spectator(i) for i in range(0,Spectator.total_count)]
 
@@ -72,7 +70,7 @@ def enter():
     #-------------------------------------
     #       음악 재생
 
-    readFile = open("SelMusic.txt","r")
+    readFile = open("Text\SelMusic.txt","r")
     music_Num = json.load(readFile)
     readFile.close()
 
@@ -85,8 +83,8 @@ def enter():
 
     #------------------------------------
     #------게임 매니저 변수 초기화---------
-    GM = GameManager()
-    GM.TotalZero()
+    gameManager = GameManager()
+    gameManager.SetTotalCountZero()
 
     #-----------------------------------
 
@@ -96,11 +94,11 @@ def enter():
 
 
 def exit():
-    global music,note_manager,guitar_list,GM,board
+    global music,note_manager,guitar_list,gameManager,board
     del(music)
     del(note_manager)
     del(guitar_list)
-    del(GM)
+    del(gameManager)
     del(board)
 
 
@@ -113,8 +111,8 @@ def resume():
    pass
 
 
-def handle_events():
-    global Key_Status,board,note_manager,music,GM,boolean
+def handle_events(frame_time):
+    global Key_Status,board,note_manager,music,gameManager,ShowHitImageFlag,total_time
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -123,41 +121,37 @@ def handle_events():
             game_framework.quit()
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_a):
             board.GiveKeyBoxSelect(0)
-            boolean=note_manager.CheckCrushKeyBox(board,GM,0)
+            ShowHitImageFlag=note_manager.CheckCrushKeyBox(board, gameManager, 0)
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_s):
             board.GiveKeyBoxSelect(1)
-            boolean=note_manager.CheckCrushKeyBox(board,GM,1)
+            ShowHitImageFlag=note_manager.CheckCrushKeyBox(board, gameManager, 1)
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_d):
             board.GiveKeyBoxSelect(2)
-            boolean=note_manager.CheckCrushKeyBox(board,GM,2)
+            ShowHitImageFlag=note_manager.CheckCrushKeyBox(board, gameManager, 2)
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_f):
             board.GiveKeyBoxSelect(3)
-            boolean=note_manager.CheckCrushKeyBox(board,GM,3)
+            ShowHitImageFlag=note_manager.CheckCrushKeyBox(board, gameManager, 3)
 
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_RETURN):
             board.GiveKeyBoxSelect(4)
-            boolean=note_manager.CheckCrushKeyBox(board,GM,4)
+            ShowHitImageFlag=note_manager.CheckCrushKeyBox(board, gameManager, 4)
 
         elif event.type == SDL_KEYUP:
             for i in range(0,5):
-                board.GiveKeyBoxUnSelect(i,GM)
+                board.GiveKeyBoxUnSelect(i, gameManager)
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_q):
             music.StopMusic()
 
-total_time=0
-def update():
+
+def update(frame_time):
     global music_time,note_manager,note_list,NoteCount,guitar_list,Current_Time
-    global music,isStart,GM,boolean,total_time,board,spectator,music_data
-    Frame_Time = get_time() - Current_Time
-    Frame_Rate = 1.0 / Frame_Time
-    print("Frame Rate : %f fps,Frame Time : %f sec,"%(Frame_Rate,Frame_Time))
+    global music,isStart,gameManager,ShowHitImageFlag,total_time,board,spectator,music_data
+
 
     if isStart ==False:                                     #초반 게임이 시작되고 3초정도 딜레이시간을 가진다
-        #music_time +=1
-
         delay(0.1)
         isStart = True
         music.PlayMusic()                                   #1초 정도 딜레이 후 음악 재생
@@ -169,30 +163,29 @@ def update():
             isStart = False
             music_data =None
             music.RemoveMusic()
-            max_total=open("max_total.txt",'w')
+            max_total=open("Text\max_total.txt",'w')
             max_total.write("[")
-            max_total.write(str(GM.MaxHitCount()))
+            max_total.write(str(gameManager.MaxHitCount()))
             max_total.write(",")
-            max_total.write(str(GM.GetTotal()))
+            max_total.write(str(gameManager.GetTotal()))
             max_total.write("]")
             max_total.close()
-            GM.TotalZero()
+            gameManager.SetTotalCountZero()
             game_framework.run(GameInfoState)
         else:
-            note_manager.NoteDown(Frame_Time)                     #각 노트의 속도대로 떨어트려라
-            note_manager.CheckCrushBoard(board,GM)
-            hit=GM.CheckHitCount()
+            note_manager.NoteDown(frame_time)                     #각 노트의 속도대로 떨어트려라
+            note_manager.CheckCrushBoard(board, gameManager)
+            hit=gameManager.CheckHitCount()
 
             for i in range(0,Spectator.total_count):
                 spectator[i].SetShowFlagTrue(hit)
 
 
-            if boolean ==True:
-                pass
+            if ShowHitImageFlag ==True:
                 total_time =0
             else:
                 if total_time >= 200:
-                    boolean = False
+                    ShowHitImageFlag = False
                     total_time =0
             total_time += 1
 
@@ -205,15 +198,14 @@ def update():
 
 
             delay(0.01)                   #0.01초 마다
-            Current_Time += Frame_Time
             if isStart == True:
                 music_time = music_time + 1
 
 
 
-def draw():
+def draw(frame_time):
     global music_time,board,note_manager,guitar_list,Frame_Rate,Frame_Time
-    global music_data,GM,boolean,spectator
+    global music_data,gameManager,ShowHitImageFlag,spectator
 
     select = note_manager.GetSelectElementCount()
     unselect = note_manager.GetUnselectElementCount()
@@ -230,14 +222,14 @@ def draw():
     clear_canvas()
     board.draw()
     if isStart == True:
-        GM.draw(boolean)
+        gameManager.draw(ShowHitImageFlag)
 
 
 
     guitar_list.draw()
     for i in range(0,Spectator.total_count):
         spectator[i].draw()
-    #print("Frame Rate : %f fps,Frame Time : %f sec," % (Frame_Rate, Frame_Time))
+
     for i in range(unselect,select):
         if local_manager[i].isSelect is True:
             local_manager[i].draw()

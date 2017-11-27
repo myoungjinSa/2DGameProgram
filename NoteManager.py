@@ -15,7 +15,7 @@ class NoteManager:
         self.SelectElementCount =0
 
         if NoteManager.noteList ==None:
-            NoteManager.noteList = [NOTE(False)]                                                    #일반 노트 생성
+            NoteManager.noteList = [Note()]                                                    #일반 노트 생성
 
     def GetNoteList(self):
         return NoteManager.noteList
@@ -29,7 +29,7 @@ class NoteManager:
 
     def CreateNoteList(self,count):                                                                 #일반 노트를 생성하고 초기화하는 함수
         if NoteManager.noteList !=None:
-            NoteManager.noteList = [NOTE(False) for i in range(0,count)]                            #count 만큼 일반노트 생성
+            NoteManager.noteList = [Note() for i in range(0, count)]                            #count 만큼 일반노트 생성
             self.maxElementCount = count                                                            #최대 노트 개수를 count 값으로 세팅
 
 
@@ -41,23 +41,23 @@ class NoteManager:
 
 
     def CheckCrushKeyBox(self,board,GameManager,index):
-        if board.KeyBox[index] != None:
-            if board.KeyBox[index].isSelect == True:
-                for i in range(self.UnselectCount-1,self.SelectElementCount-1):
-                    if self.noteList[i].isSelect ==True  and self.noteList[i].CenterY-self.noteList[i].height/2 < board.KeyBox[index].CenterY+self.noteList[i].height/2 +180                \
-                    and self.noteList[i].CenterX-1 == board.KeyBox[index].CenterX:
+        if board.keybox[index] != None:
+            if board.keybox[index].isSelect == True:
+                for i in range(self.UnselectCount,self.SelectElementCount):
+                    if self.noteList[i].isSelect ==True  and self.noteList[i].CenterY-self.noteList[i].height/2 < board.keybox[index].CenterY+self.noteList[i].height/2 +180               \
+                    and self.noteList[i].CenterX-1 == board.keybox[index].CenterX:
                         self.SetElementUnselect(i)
                         self.SetNotePosZero(i)
                         GameManager.HitCount()
                         GameManager.HitTotalCount()
-                        boolean =True
+                        CrushFlag =True
                         GameManager.isHit =True
-                        return boolean
+                        return CrushFlag
 
 
     def CheckCrushBoard(self,board,GameManager):
         global boolean
-        for i in range(self.UnselectCount-1,self.SelectElementCount-1):
+        for i in range(self.UnselectCount,self.SelectElementCount):
             if self.noteList[i].isSelect ==True and self.noteList[i].CenterY <= 0:
                 self.SetElementUnselect(i)
                 self.SetNotePosZero(i)
@@ -90,10 +90,10 @@ class NoteManager:
             NoteManager.noteList[self.SelectElementCount].CenterX =  -120
             NoteManager.noteList[self.SelectElementCount].CetnerY = -30
 
-    def NoteDown(self,Frame_Time):
+    def NoteDown(self,frame_Time):
         if self.SelectElementCount>=0:
             for i in range(self.UnselectCount,self.SelectElementCount):
-                NoteManager.noteList[i].distance = Frame_Time*NoteManager.noteList[i].speed                         # 거리 = 프레임 경과시간 * 각 개별 노드 속도
+                NoteManager.noteList[i].distance = frame_Time*NoteManager.noteList[i].speed                         # 거리 = 프레임 경과시간 * 각 개별 노드 속도
                 NoteManager.noteList[i].CenterY = NoteManager.noteList[i].CenterY-NoteManager.noteList[i].distance  # 다음 프레임에서의 노드 위치 = 이전 프레임에서의 노드 위치 - 거리
 
     def GetCurrentNote(self):

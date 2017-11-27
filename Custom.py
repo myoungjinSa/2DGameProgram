@@ -23,10 +23,10 @@ def enter():
     music.SetMusic(1)
     music.PlayMusic()
 
-    file = open("hanol.txt","w")
+    file = open("Text\hanol.txt","w")
 
 
-def handle_events():
+def handle_events(frame_time):
     global Current_Time,music_interval,music_time,end_Time,music_length,start_time,down_Count
     events = get_events()
     for event in events:
@@ -54,11 +54,11 @@ def resume():
     pass
 
 
-def update():
+def update(frame_time):
     global Current_Time
     Current_Time = get_time()
 
 
 
-def draw():
+def draw(frame_time):
     pass

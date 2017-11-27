@@ -22,7 +22,7 @@ def enter():
 
 
 
-def handle_events():
+def handle_events(frame_time):
     global music_Sel,Sample_Music
     events = get_events()
     for event in events:
@@ -35,13 +35,13 @@ def handle_events():
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_a):
             music_Sel.update("left")
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_RETURN):
-            saveMusic = open("SelMusic.txt","w")
+            saveMusic = open("Text\SelMusic.txt","w")
             saveMusic.write(str(music_Sel.GetCurrentMusic()))
             saveMusic.close()
             game_framework.run(main_state)
 
 
-def update():
+def update(frame_time):
     global music_Sel,Sample_Music
 
     if Sample_Music.IsChangeMusic(music_Sel.GetCurrentMusic()):
@@ -52,7 +52,7 @@ def update():
 
 
 
-def draw():
+def draw(frame_time):
     global music_Sel
 
     clear_canvas()

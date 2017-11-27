@@ -2,7 +2,7 @@ from pico2d import *
 from gameManager import *
 
 class MusicSelScreen:
-    Sel_image = ["select_Ed_Sheeran.png","select_han_ol.png","select_Blue.png"]
+    Sel_image = ["Resource\select_Ed_Sheeran.png","Resource\select_han_ol.png","Resource\select_Blue.png"]
     def __init__(self):
         self.drawX,self.drawY = 0.0,0.0
         self.width = 0

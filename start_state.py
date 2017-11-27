@@ -12,7 +12,8 @@ name = "StartState"
 image = None
 logo_time = 0.0
 count = 10
-fonts = ["p.png","L.png","A.png","Y_two.png","W_small.png","I_small.png","T.png","H.png","R.png","Y_small.png","T_small.png","H_small.png","M.png"]
+fonts = ["Resource\p.png","Resource\L.png","Resource\A.png","Resource\Y_two.png","Resource\W_small.png","Resource\I_small.png","Resource\T.png","Resource\H.png","Resource\R.png",
+         "Resource\Y_small.png","Resource\T_small.png","Resource\H_small.png","Resource\M.png"]
 StartFont = Font.FONT()
 font = [Font.FONT() for i in range(Font.FONT.count)]
 mouseDown = False
@@ -47,8 +48,8 @@ def enter():
         font[j].SetImage(i)                 #폰트 이미지 세팅
         font[j].SetFontWH(30,30)            #폰트 크기  60,30 세팅
         j+=1
-    board = Board.BOARD()
-    StartFont.SetImage("GameStart.png")     #게임시작 폰트 이미지 불러오기
+    board = Board.Board()
+    StartFont.SetImage("Resource\GameStart.png")     #게임시작 폰트 이미지 불러오기
     StartFont.SetFontWH(200,60)              #게임시작 폰트 크기 세팅
     SetPosition(font,StartFont,100,580)
 
@@ -63,7 +64,7 @@ def exit():
 
 
 
-def update():
+def update(frame_time):
     global mouseDown
 
     if mouseDown == True:
@@ -76,7 +77,7 @@ def update():
         font[i].update()
 
 
-def draw():
+def draw(frame_time):
     global image,font,StartFont,board,name
     board.draw()
 
@@ -93,7 +94,7 @@ def draw():
 
 
 
-def handle_events():
+def handle_events(frame_event):
     global mouseDown
     events = get_events()
     for event in events:
