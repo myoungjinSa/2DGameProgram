@@ -12,7 +12,8 @@ class SOUND:
         self.index =0
         self.isChangeMusic = False      #음악의 변경이 있나 확인 변수
         if self.index == 0:
-            self.SoundLength = 76.00
+            self.SoundLength = 90.00
+        
 
     def SetTickStart(self):
         self.StartTime = pico2d.get_time()

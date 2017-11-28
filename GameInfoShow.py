@@ -4,7 +4,7 @@ import json
 from gameManager import *
 
 class GameInfoScreen:
-    InfoImage = ["GameInfo_Animation_1.png","GameInfo_Animation_2.png","GameInfo_Animation_3.png","GameInfo_Animation_4.png"]
+    InfoImage = ["Resource\GameInfo_Animation_1.png","Resource\GameInfo_Animation_2.png","Resource\GameInfo_Animation_3.png","Resource\GameInfo_Animation_4.png"]
 
     def __init__(self):
         self.drawX,self.drawY = 0.0,0.0
@@ -16,20 +16,22 @@ class GameInfoScreen:
 
         self.Animate_index = 0
         self.image = None
-        self.max_hit_Image = load_image("max_hit.png")
-        self.total_hit_Image =load_image("total_hit.png")
+        self.max_hit_Image = load_image("Resource\max_hit.png")
+        self.total_hit_Image =load_image("Resource\_total_hit.png")
         self.Numfont = [FONT() for i in range(0, 3)]
         self.TotalNumfont = [FONT() for i in range(0,3)]
 
         if self.Numfont !=None:
             for i in range(0, 2):
-                self.Numfont[i].NumFont = [load_image("Num_0.png"), load_image("Num_1.png"), load_image("Num_2.png"), load_image("Num_3.png"), load_image("Num_4.png"), load_image("Num_5.png"),
-                                       load_image("Num_6.png"), load_image("Num_7.png")  , load_image("Num_8.png"), load_image("Num_9.png")]
+                self.Numfont[i].NumFont = [load_image("Resource\Zero.png"), load_image("Resource\One.png"), load_image("Resource\Two.png"), load_image("Resource\Three.png"),
+                                        load_image("Resource\Four.png"), load_image("Resource\Five.png"),load_image("Resource\Six.png"),
+                                            load_image("Resource\Seven.png")  , load_image("Resource\Eight.png"), load_image("Resource\_Nine.png")]
 
         if self.TotalNumfont != None:
             for i in range(0,2):
-                self.TotalNumfont[i].NumFont = [load_image("Num_0.png"), load_image("Num_1.png"), load_image("Num_2.png"), load_image("Num_3.png"), load_image("Num_4.png"), load_image("Num_5.png"),
-                                       load_image("Num_6.png"), load_image("Num_7.png")  , load_image("Num_8.png"), load_image("Num_9.png")]
+                self.TotalNumfont[i].NumFont = [load_image("Resource\Zero.png"), load_image("Resource\Two.png"), load_image("Resource\Three.png"),
+                                                load_image("Resource\Four.png"), load_image("Resource\Five.png"), load_image("Resource\Five.png"),
+                                       load_image("Resource\Six.png"), load_image("Resource\Seven.png")  , load_image("Resource\Eight.png"), load_image("Resource\_Nine.png")]
 
 
         self.Numfont[0].SetFontPos(650, 300)
@@ -65,7 +67,7 @@ class GameInfoScreen:
 
 
     def ReadMaxTotalCount(self):
-        text = open("max_total.txt","r")
+        text = open("Text\max_total.txt","r")
         maxTotal = json.load(text)
         self.maxHit = maxTotal[0]
         self.totalHit = maxTotal[1]
@@ -93,33 +95,33 @@ class GameInfoScreen:
         self.total_hit_Image.draw(self.total_Font_PosX,self.total_Font_PosY)
 
         if self.maxHit <10:
-            self.Numfont[0].NumFont[self.maxHit].draw(self.Numfont[0].x, self.Numfont[0].y, self.Numfont[0].FontWidth,
+            self.Numfont[0].NumFont.draw(self.Numfont[0].x, self.Numfont[0].y, self.Numfont[0].FontWidth,
                                                         self.Numfont[0].FontHeight)
         elif self.maxHit >=10 and self.maxHit <100 :
             GameManager.ten_digit = self.maxHit / 10
-            self.Numfont[0].NumFont[self.maxHit % 10].draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
-            self.Numfont[1].NumFont[int(GameManager.ten_digit)].draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
+            self.Numfont[0].NumFont.draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
+            self.Numfont[1].NumFont.draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
 
         elif self.maxHit >= 100 and self.maxHit < 1000:
             GameManager.hundred_digit = self.maxHit / 100
-            self.Numfont[0].NumFont[self.maxHit % 10].draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
-            self.Numfont[1].NumFont[int(GameManager.ten_digit)].draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
-            self.Numfont[2].NumFont[int(GameManager.hundred_digit)].draw(self.Numfont[2].x, self.Numfont[2].y,self.Numfont[2].FontWidth,self.Numfont[2].FontHeight)
+            self.Numfont[0].NumFont.draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
+            self.Numfont[1].NumFont.draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
+            self.Numfont[2].NumFont.draw(self.Numfont[2].x, self.Numfont[2].y,self.Numfont[2].FontWidth,self.Numfont[2].FontHeight)
 
 
         if self.totalHit <10:
-            self.Numfont[0].NumFont[self.totalHit].draw(self.TotalNumfont[0].x,self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth,self.TotalNumfont[0].FontHeight)
+            self.Numfont[0].NumFont.draw(self.TotalNumfont[0].x,self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth,self.TotalNumfont[0].FontHeight)
 
         elif self.totalHit >=10 and self.totalHit <100 :
             GameManager.ten_digit = self.totalHit / 10
-            self.Numfont[0].NumFont[self.totalHit % 10].draw(self.TotalNumfont[0].x, self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth, self.TotalNumfont[0].FontHeight)
-            self.Numfont[1].NumFont[int(GameManager.ten_digit)].draw(self.TotalNumfont[1].x, self.TotalNumfont[1].y,self.TotalNumfont[1].FontWidth,self.TotalNumfont[1].FontHeight)
+            self.Numfont[0].NumFont.draw(self.TotalNumfont[0].x, self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth, self.TotalNumfont[0].FontHeight)
+            self.Numfont[1].NumFont.draw(self.TotalNumfont[1].x, self.TotalNumfont[1].y,self.TotalNumfont[1].FontWidth,self.TotalNumfont[1].FontHeight)
 
         elif self.totalHit >= 100 and self.totalHit < 1000:
             GameManager.hundred_digit = self.totalHit / 100
-            self.Numfont[0].NumFont[self.totalHit % 10].draw(self.TotalNumfont[0].x, self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth, self.TotalNumfont[0].FontHeight)
-            self.Numfont[1].NumFont[int(GameManager.ten_digit)].draw(self.TotalNumfont[1].x, self.TotalNumfont[1].y,self.TotalNumfont[1].FontWidth,self.TotalNumfont[1].FontHeight)
-            self.Numfont[2].NumFont[int(GameManager.hundred_digit)].draw(self.TotalNumfont[2].x, self.TotalNumfont[2].y,self.TotalNumfont[2].FontWidth,self.TotalNumfont[2].FontHeight)
+            self.Numfont[0].NumFont.draw(self.TotalNumfont[0].x, self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth, self.TotalNumfont[0].FontHeight)
+            self.Numfont[1].NumFont.draw(self.TotalNumfont[1].x, self.TotalNumfont[1].y,self.TotalNumfont[1].FontWidth,self.TotalNumfont[1].FontHeight)
+            self.Numfont[2].NumFont.draw(self.TotalNumfont[2].x, self.TotalNumfont[2].y,self.TotalNumfont[2].FontWidth,self.TotalNumfont[2].FontHeight)
 
 
 
