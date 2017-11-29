@@ -94,34 +94,34 @@ class GameInfoScreen:
         self.max_hit_Image.draw(self.max_Font_PosX,self.max_Font_PosY)
         self.total_hit_Image.draw(self.total_Font_PosX,self.total_Font_PosY)
 
-        if self.maxHit <10:
-            self.Numfont[0].NumFont.draw(self.Numfont[0].x, self.Numfont[0].y, self.Numfont[0].FontWidth,
-                                                        self.Numfont[0].FontHeight)
-        elif self.maxHit >=10 and self.maxHit <100 :
-            GameManager.ten_digit = self.maxHit / 10
-            self.Numfont[0].NumFont.draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
-            self.Numfont[1].NumFont.draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
+        #if self.maxHit <10:
+         #   self.Numfont[0].NumFont.draw(self.Numfont[0].x, self.Numfont[0].y, self.Numfont[0].FontWidth,
+                                                        #self.Numfont[0].FontHeight)
+        #elif self.maxHit >=10 and self.maxHit <100 :
+         #   GameManager.ten_digit = self.maxHit / 10
+          #  self.Numfont[0].NumFont.draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
+           # self.Numfont[1].NumFont.draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
 
-        elif self.maxHit >= 100 and self.maxHit < 1000:
-            GameManager.hundred_digit = self.maxHit / 100
-            self.Numfont[0].NumFont.draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
-            self.Numfont[1].NumFont.draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
-            self.Numfont[2].NumFont.draw(self.Numfont[2].x, self.Numfont[2].y,self.Numfont[2].FontWidth,self.Numfont[2].FontHeight)
+        #elif self.maxHit >= 100 and self.maxHit < 1000:
+         #   GameManager.hundred_digit = self.maxHit / 100
+          #  self.Numfont[0].NumFont.draw(self.Numfont[0].x, self.Numfont[0].y,self.Numfont[0].FontWidth, self.Numfont[0].FontHeight)
+           # self.Numfont[1].NumFont.draw(self.Numfont[1].x, self.Numfont[1].y,self.Numfont[1].FontWidth,self.Numfont[1].FontHeight)
+            #self.Numfont[2].NumFont.draw(self.Numfont[2].x, self.Numfont[2].y,self.Numfont[2].FontWidth,self.Numfont[2].FontHeight)
 
 
-        if self.totalHit <10:
-            self.Numfont[0].NumFont.draw(self.TotalNumfont[0].x,self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth,self.TotalNumfont[0].FontHeight)
+        #if self.totalHit <10:
+         #   self.Numfont[0].NumFont.draw(self.TotalNumfont[0].x,self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth,self.TotalNumfont[0].FontHeight)
 
-        elif self.totalHit >=10 and self.totalHit <100 :
-            GameManager.ten_digit = self.totalHit / 10
-            self.Numfont[0].NumFont.draw(self.TotalNumfont[0].x, self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth, self.TotalNumfont[0].FontHeight)
-            self.Numfont[1].NumFont.draw(self.TotalNumfont[1].x, self.TotalNumfont[1].y,self.TotalNumfont[1].FontWidth,self.TotalNumfont[1].FontHeight)
+        #elif self.totalHit >=10 and self.totalHit <100 :
+         #   GameManager.ten_digit = self.totalHit / 10
+          #  self.Numfont[0].NumFont.draw(self.TotalNumfont[0].x, self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth, self.TotalNumfont[0].FontHeight)
+           # self.Numfont[1].NumFont.draw(self.TotalNumfont[1].x, self.TotalNumfont[1].y,self.TotalNumfont[1].FontWidth,self.TotalNumfont[1].FontHeight)
 
-        elif self.totalHit >= 100 and self.totalHit < 1000:
-            GameManager.hundred_digit = self.totalHit / 100
-            self.Numfont[0].NumFont.draw(self.TotalNumfont[0].x, self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth, self.TotalNumfont[0].FontHeight)
-            self.Numfont[1].NumFont.draw(self.TotalNumfont[1].x, self.TotalNumfont[1].y,self.TotalNumfont[1].FontWidth,self.TotalNumfont[1].FontHeight)
-            self.Numfont[2].NumFont.draw(self.TotalNumfont[2].x, self.TotalNumfont[2].y,self.TotalNumfont[2].FontWidth,self.TotalNumfont[2].FontHeight)
+        #elif self.totalHit >= 100 and self.totalHit < 1000:
+         #   GameManager.hundred_digit = self.totalHit / 100
+          #  self.Numfont[0].NumFont.draw(self.TotalNumfont[0].x, self.TotalNumfont[0].y,self.TotalNumfont[0].FontWidth, self.TotalNumfont[0].FontHeight)
+           # self.Numfont[1].NumFont.draw(self.TotalNumfont[1].x, self.TotalNumfont[1].y,self.TotalNumfont[1].FontWidth,self.TotalNumfont[1].FontHeight)
+            #self.Numfont[2].NumFont.draw(self.TotalNumfont[2].x, self.TotalNumfont[2].y,self.TotalNumfont[2].FontWidth,self.TotalNumfont[2].FontHeight)
 
 
 

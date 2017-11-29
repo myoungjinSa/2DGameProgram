@@ -34,7 +34,7 @@ class NoteManager:
 
 
     def CheckIsEnd(self):
-        if self.SelectElementCount>=244:                                                            #273
+        if self.SelectElementCount>=253:                                                            #273
             return True
         else:
             return False

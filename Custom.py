@@ -7,7 +7,7 @@ import game_framework
 name = "Custom"
 
 
-music = SOUND()
+music = Sound()
 file =None
 Current_Time =0.0
 music_interval =0.0

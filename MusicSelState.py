@@ -7,7 +7,7 @@ import main_state
 name ="MusicSelState"
 
 music_Sel = None
-Sample_Music = SOUND()
+Sample_Music = Sound()
 
 def enter():
     global music_Sel

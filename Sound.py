@@ -1,19 +1,28 @@
 import pico2d
 
-class SOUND:
+class Sound:
     music_list= ["Shape_of_you.wav","Han_ol.wav","Bolbbalgan.wav"]
     music = None
+    #음악 길이
+    SHAPE_OF_YOU_LENGTH = 75.00
+    MEET_ON_SPRING_LENGTH = 110.00
+    BLUE_LENGTH = 100.00
 
     def __init__(self):
         self.EndTime = 0.0           #사운드 타임
         self.StartTime = 0.0
         self.music_Time = 0.0
         self.SoundLength = 0.0          #사운드 길이
-        self.index =0
         self.isChangeMusic = False      #음악의 변경이 있나 확인 변수
-        if self.index == 0:
-            self.SoundLength = 90.00
-        
+        self.SoundLength = 0.0
+
+    def SetSoundLength(self,index):
+        if index == 0:
+            self.SoundLength = Sound.SHAPE_OF_YOU_LENGTH
+        elif index == 1:
+            self.SoundLength = Sound.MEET_ON_SPRING_LENGTH
+        elif index == 2:
+            self.SoundLength =Sound.BLUE_LENGTH
 
     def SetTickStart(self):
         self.StartTime = pico2d.get_time()
@@ -35,7 +44,7 @@ class SOUND:
     def SetMusic(self,index):
         self.index = index
         pico2d.audio_on = True
-        SOUND.music=pico2d.load_wav(SOUND.music_list[index])
+        Sound.music=pico2d.load_wav(Sound.music_list[index])
 
 
 
@@ -51,19 +60,19 @@ class SOUND:
 
 
     def PlayMusic(self):
-        if SOUND.music !=None:
-            SOUND.music.play()
+        if Sound.music !=None:
+            Sound.music.play()
 
 
 
     def StopMusic(self):
-        if SOUND.music != None:
-            SOUND.music.stop()
+        if Sound.music != None:
+            Sound.music.stop()
 
 
     def RemoveMusic(self):
-        if SOUND.music !=None:
-            del(SOUND.music)
+        if Sound.music !=None:
+            del(Sound.music)
 
 
 

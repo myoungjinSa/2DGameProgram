@@ -25,7 +25,7 @@ Key_Status = {0:"SDLK_a",1:"SDLK_s",2:"SDLK_d",3:"SDLK_f",4:"SDLK_RETURN"}
 Distance = 0.0
 total_time = 0
 music_data = None
-music = SOUND()
+music = Sound()
 sound = None
 isStart = False
 ShowHitImageFlag =False
@@ -74,7 +74,8 @@ def enter():
     music_Num = json.load(readFile)
     readFile.close()
 
-    music.SetMusic(int(music_Num))                                               # SOUND.music_list = ["Shape_of_you.mp3","Han_ol_meet_on_spring.mp3","Bol_bbalgan_Blue.mp3"]
+    music.SetMusic(int(music_Num))              # SOUND.music_list = ["Shape_of_you.mp3","Han_ol_meet_on_spring.mp3","Bol_bbalgan_Blue.mp3"]
+    music.SetSoundLength(int(music_Num))
     #-------------------------------------
     #------음악 관련 데이타 불러오기---------
     text_data_file = open(file_list[music_Num],'r')
