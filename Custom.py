@@ -20,10 +20,10 @@ def enter():
     global music,file,start_time
     open_canvas(1160,760)
     start_time = float(get_time())
-    music.SetMusic(1)
+    music.SetMusic(2)
     music.PlayMusic()
 
-    file = open("Text\hanol.txt","w")
+    file = open("Text\BolBBalgan_Ctom.txt","w")
 
 
 def handle_events(frame_time):
