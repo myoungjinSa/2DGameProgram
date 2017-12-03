@@ -40,7 +40,7 @@ gameManager = None
 #다음 프레임 x = 현재 프레임 x + (객체의 속도 * 경과시간)
 #내가 구현해야 될것은
 #-----------------------------------------
-
+#
 
 def enter():
     global board,note_manager,note_list
