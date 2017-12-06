@@ -8,7 +8,7 @@ name = "GameInfoState"
 infoScreen = None
 
 def enter():
-    global infoScreen,GM
+    global infoScreen
     infoScreen = GameInfoScreen()
 
     infoScreen.SetInfoScreenWH(1180,760)

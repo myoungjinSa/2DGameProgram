@@ -44,7 +44,7 @@ class NoteManager:
         if board.keybox[index] != None:
             if board.keybox[index].isSelect == True:
                 for i in range(self.UnselectCount,self.SelectElementCount):
-                    if self.noteList[i].isSelect ==True  and self.noteList[i].CenterY-self.noteList[i].height/2 < board.keybox[index].CenterY+self.noteList[i].height/2 +180               \
+                    if self.noteList[i].isSelect ==True  and self.noteList[i].CenterY-self.noteList[i].height/2 < board.keybox[index].CenterY+self.noteList[i].height/2 +180              \
                     and self.noteList[i].CenterX-1 == board.keybox[index].CenterX:
                         self.SetElementUnselect(i)
                         self.SetNotePosZero(i)
