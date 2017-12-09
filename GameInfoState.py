@@ -1,7 +1,11 @@
 import game_framework
 from pico2d import *
 from GameInfoShow import *
+
 from main_state import *
+import MusicSelState
+
+
 
 name = "GameInfoState"
 
@@ -37,6 +41,9 @@ def handle_events(frame_time):
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_RETURN:
+            game_framework.run(MusicSelState)
+
 
 
 def update(frame_time):

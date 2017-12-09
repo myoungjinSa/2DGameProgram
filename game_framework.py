@@ -85,6 +85,9 @@ def run(start_state):
     global running, stack
     running = True
     stack = [start_state]
+    if len(stack)>=2:
+        stack[-2].exit()
+
     start_state.enter()
     current_time = time.clock()
     while (running):

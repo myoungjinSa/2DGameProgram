@@ -107,6 +107,7 @@ class NoteManager:
         NoteManager.noteList[index].speed =0
         NoteManager.noteList[index].width = 0
         NoteManager.noteList[index].height = 0
+        NoteManager.noteList[index].DelNote()
 
 
     def SetNoteSpeed(self,speed):

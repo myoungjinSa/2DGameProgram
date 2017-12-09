@@ -31,7 +31,7 @@ class Note:
         pass
 
     def DelNote(self):
-        pass
+        del(self)
 
     def Check_CrushBoard(self):
         if self.CenterY - self.height <=0:

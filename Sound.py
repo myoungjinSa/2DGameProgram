@@ -6,7 +6,7 @@ class Sound:
     #음악 길이
     SHAPE_OF_YOU_LENGTH = 75.00
     MEET_ON_SPRING_LENGTH = 110.00
-    BLUE_LENGTH =75.00
+    BLUE_LENGTH =85.00
 
     def __init__(self):
         self.EndTime = 0.0           #사운드 타임
@@ -44,6 +44,7 @@ class Sound:
     def SetMusic(self,index):
         self.index = index
         pico2d.audio_on = True
+
         Sound.music=pico2d.load_wav(Sound.music_list[index])
 
 

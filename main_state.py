@@ -30,6 +30,8 @@ sound = None
 isStart = False
 ShowHitImageFlag =False
 gameManager = None
+
+delay_point = None
 #-----------------------------------------
 #               시간
 #보드의 세로 높이는     750
@@ -49,12 +51,14 @@ def enter():
     global gameManager
     global spectator
     global file_list
+    global delay_point
+
     #-------보드 위치 세팅----------------
     board = Board()
     board.CreateKeyBox()
     #-------노트 생성 매니저 클래스 생성----
     note_manager = NoteManager()
-    note_manager.CreateNoteList(310)
+    note_manager.CreateNoteList(250)
     #--------시간 경과-----------
     Current_Time = get_time()
     #---------------------------
@@ -89,18 +93,26 @@ def enter():
 
     #-----------------------------------
 
+    if int(music_Num)==0 :
+        delay_point = 0.01
+    elif int(music_Num)==1 :
+        delay_point =0.009
+    elif int(music_Num)==2:
+        delay_point =0.008
+
 
 
 
 
 
 def exit():
-    global music,note_manager,guitar_list,gameManager,board
+    global music,note_manager,guitar_list,gameManager,board,spectator
     del(music)
     del(note_manager)
     del(guitar_list)
     del(gameManager)
     del(board)
+    del(spectator)
 
 
 
@@ -151,6 +163,7 @@ def handle_events(frame_time):
 def update(frame_time):
     global music_time,note_manager,note_list,NoteCount,guitar_list,Current_Time
     global music,isStart,gameManager,ShowHitImageFlag,total_time,board,spectator,music_data
+    global delay_point
 
 
     if isStart ==False:                                     #초반 게임이 시작되고 3초정도 딜레이시간을 가진다
@@ -199,7 +212,7 @@ def update(frame_time):
                         spectator[i].update(board,i,spectator)
 
 
-            delay(0.01)                   #0.01초 마다
+            delay(delay_point)                   #0.01초 마다
             if isStart == True:
                 music_time = music_time + 1
 

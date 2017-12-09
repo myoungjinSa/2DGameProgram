@@ -69,5 +69,7 @@ def pause():
 
 
 def exit():
-    pass
+    global music_Sel
+    del(music_Sel)
+
 

@@ -57,8 +57,11 @@ def enter():
 
 
 def exit():
-    global image
+    global image,fonts,font,board
     del (image)
+    del(fonts)
+    del(font)
+    del(board)
 
     close_canvas()
 
