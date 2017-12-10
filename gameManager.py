@@ -94,7 +94,7 @@ class GameManager:
 
 
     def draw(self,boolean):
-        if boolean ==True:
+        if boolean ==1:
             if self.isHit == True:
                 self.font.HitFont[0].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
                 if self.hitcount < 10:
@@ -110,8 +110,9 @@ class GameManager:
                     self.Numfont[2].NumFont[int(GameManager.hundred_digit)].draw(self.Numfont[2].x, self.Numfont[2].y,self.Numfont[2].FontWidth,self.Numfont[2].FontHeight)
             elif self.isHit==False:
                 self.font.HitFont[1].draw(self.font.x,self.font.y,self.font.FontWidth,self.font.FontHeight)
-          #      pass
-        else:
+
+        elif boolean == 2:
             pass
+
 
 

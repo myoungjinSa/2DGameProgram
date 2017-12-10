@@ -4,9 +4,9 @@ class Sound:
     music_list= ["Shape_of_you.wav","Han_ol.wav","Bolbbalgan.wav"]
     music = None
     #음악 길이
-    SHAPE_OF_YOU_LENGTH = 75.00
-    MEET_ON_SPRING_LENGTH = 110.00
-    BLUE_LENGTH =85.00
+    SHAPE_OF_YOU_LENGTH = 15.00
+    MEET_ON_SPRING_LENGTH = 15.00
+    BLUE_LENGTH =15.00
 
     def __init__(self):
         self.EndTime = 0.0           #사운드 타임

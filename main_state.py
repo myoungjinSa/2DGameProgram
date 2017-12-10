@@ -28,7 +28,7 @@ music_data = None
 music = Sound()
 sound = None
 isStart = False
-ShowHitImageFlag =False
+ShowHitImageFlag ={"miss":0,"hit":1,"nothing":2}
 gameManager = None
 
 delay_point = None
@@ -94,9 +94,9 @@ def enter():
     #-----------------------------------
 
     if int(music_Num)==0 :
-        delay_point = 0.01
+        delay_point = 0.011
     elif int(music_Num)==1 :
-        delay_point =0.009
+        delay_point =0.012
     elif int(music_Num)==2:
         delay_point =0.008
 
@@ -106,13 +106,18 @@ def enter():
 
 
 def exit():
-    global music,note_manager,guitar_list,gameManager,board,spectator
+    global music,note_manager,guitar_list,gameManager,board,spectator,ShowHitImageFlag,isStart,music_time,total_time
     del(music)
     del(note_manager)
     del(guitar_list)
     del(gameManager)
     del(board)
     del(spectator)
+    isStart = False
+    music_time = 0.0
+    total_time = 0
+
+
 
 
 
@@ -163,7 +168,7 @@ def handle_events(frame_time):
 def update(frame_time):
     global music_time,note_manager,note_list,NoteCount,guitar_list,Current_Time
     global music,isStart,gameManager,ShowHitImageFlag,total_time,board,spectator,music_data
-    global delay_point
+    global delay_point,ShowHitImageFlag
 
 
     if isStart ==False:                                     #초반 게임이 시작되고 3초정도 딜레이시간을 가진다
@@ -186,6 +191,7 @@ def update(frame_time):
             max_total.write("]")
             max_total.close()
             gameManager.SetTotalCountZero()
+            ShowHitImageFlag = 2
             game_framework.run(GameInfoState)
         else:
             note_manager.NoteDown(frame_time)                     #각 노트의 속도대로 떨어트려라
@@ -196,11 +202,11 @@ def update(frame_time):
                 spectator[i].SetShowFlagTrue(hit)
 
 
-            if ShowHitImageFlag ==True:
+            if ShowHitImageFlag =="hit":
                 total_time =0
             else:
-                if total_time >= 200:
-                    ShowHitImageFlag = False
+                if total_time >= 250:
+                    ShowHitImageFlag = "miss"
                     total_time =0
             total_time += 1
 
