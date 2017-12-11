@@ -115,6 +115,7 @@ def exit():
     del(spectator)
     isStart = False
     music_time = 0.0
+    
     total_time = 0
 
 
