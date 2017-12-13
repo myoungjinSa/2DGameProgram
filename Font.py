@@ -9,12 +9,12 @@ class FONT:
     def __init__(self):
         self.x = 0
         self.y = 0
-        self.FontWidth = 0.0
-        self.FontHeight = 0,0
+        self.fontWidth = 0.0
+        self.fontHeight = 0.0
         self.image = Image
         self.total =0
-        self.HitFont = None
-        self.NumFont=None
+        self.hitFont = None
+        self.numFont=None
 
     def SetImage(self,name):
         self.image = load_image(name)
@@ -26,8 +26,8 @@ class FONT:
 
 
     def SetFontWH(self,width, height):
-        self.FontWidth = width
-        self.FontHeight = height
+        self.fontWidth = width
+        self.fontHeight = height
 
 
     def draw(self):
@@ -36,7 +36,7 @@ class FONT:
             self.image.opacify(0.5)
         else:
             self.image.opacify(1)
-        self.image.draw(self.x,self.y,self.FontWidth,self.FontHeight)
+        self.image.draw(self.x, self.y, self.fontWidth, self.fontHeight)
 
 
     def update(self):

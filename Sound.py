@@ -4,37 +4,37 @@ class Sound:
     music_list= ["Shape_of_you.wav","Han_ol.wav","Bolbbalgan.wav"]
     music = None
     #음악 길이
-    SHAPE_OF_YOU_LENGTH = 15.00
-    MEET_ON_SPRING_LENGTH = 15.00
-    BLUE_LENGTH =15.00
+    SHAPE_OF_YOU_LENGTH = 75.00
+    MEET_ON_SPRING_LENGTH = 85.00
+    BLUE_LENGTH =75.00
 
     def __init__(self):
-        self.EndTime = 0.0           #사운드 타임
-        self.StartTime = 0.0
+        self.endTime = 0.0           #사운드 타임
+        self.startTime = 0.0
         self.music_Time = 0.0
-        self.SoundLength = 0.0          #사운드 길이
+        self.soundLength = 0.0          #사운드 길이
         self.isChangeMusic = False      #음악의 변경이 있나 확인 변수
-        self.SoundLength = 0.0
+        self.soundLength = 0.0
 
     def SetSoundLength(self,index):
         if index == 0:
-            self.SoundLength = Sound.SHAPE_OF_YOU_LENGTH
+            self.soundLength = Sound.SHAPE_OF_YOU_LENGTH
         elif index == 1:
-            self.SoundLength = Sound.MEET_ON_SPRING_LENGTH
+            self.soundLength = Sound.MEET_ON_SPRING_LENGTH
         elif index == 2:
-            self.SoundLength =Sound.BLUE_LENGTH
+            self.soundLength =Sound.BLUE_LENGTH
 
     def SetTickStart(self):
-        self.StartTime = pico2d.get_time()
+        self.startTime = pico2d.get_time()
 
 
     def SetTickEnd(self):
-        self.EndTime = pico2d.get_time()
+        self.endTime = pico2d.get_time()
 
 
     def CheckMusicTime(self):
-        self.music_Time = self.EndTime - self.StartTime
-        if self.music_Time >=self.SoundLength:
+        self.music_Time = self.endTime - self.startTime
+        if self.music_Time >=self.soundLength:
             return True
         else:
             return False

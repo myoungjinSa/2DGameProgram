@@ -9,7 +9,7 @@ name = "Custom"
 
 music = Sound()
 file =None
-Current_Time =0.0
+current_Time =0.0
 music_interval =0.0
 start_time = 0.0
 end_Time =0.0
@@ -27,7 +27,7 @@ def enter():
 
 
 def handle_events(frame_time):
-    global Current_Time,music_interval,music_time,end_Time,music_length,start_time,down_Count
+    global current_Time,music_interval,music_time,end_Time,music_length,start_time,down_Count
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -55,8 +55,8 @@ def resume():
 
 
 def update(frame_time):
-    global Current_Time
-    Current_Time = get_time()
+    global current_Time
+    current_Time = get_time()
 
 
 

@@ -14,7 +14,7 @@ logo_time = 0.0
 count = 10
 fonts = ["Resource\p.png","Resource\L.png","Resource\A.png","Resource\Y_two.png","Resource\W_small.png","Resource\I_small.png","Resource\T.png","Resource\H.png","Resource\R.png",
          "Resource\Y_small.png","Resource\T_small.png","Resource\H_small.png","Resource\M.png"]
-StartFont = Font.FONT()
+startFont = Font.FONT()
 font = [Font.FONT() for i in range(Font.FONT.count)]
 mouseDown = False
 Font.mouseOnGameStart =False
@@ -49,9 +49,9 @@ def enter():
         font[j].SetFontWH(30,30)            #폰트 크기  60,30 세팅
         j+=1
     board = Board.Board()
-    StartFont.SetImage("Resource\GameStart.png")     #게임시작 폰트 이미지 불러오기
-    StartFont.SetFontWH(200,60)              #게임시작 폰트 크기 세팅
-    SetPosition(font,StartFont,100,580)
+    startFont.SetImage("Resource\GameStart.png")     #게임시작 폰트 이미지 불러오기
+    startFont.SetFontWH(200, 60)              #게임시작 폰트 크기 세팅
+    SetPosition(font, startFont, 100, 580)
 
 
 
@@ -81,7 +81,7 @@ def update(frame_time):
 
 
 def draw(frame_time):
-    global image,font,StartFont,board,name
+    global image,font,startFont,board,name
     board.draw()
 
     #image[0].draw(300,350)
@@ -90,7 +90,7 @@ def draw(frame_time):
         font[i].draw()
 
 
-    StartFont.draw()
+    startFont.draw()
     update_canvas()
 
 
