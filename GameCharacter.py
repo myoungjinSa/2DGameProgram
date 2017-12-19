@@ -26,6 +26,9 @@ class Guitarlist:
 
     def update(self):
         Guitarlist.animateIndex +=1
+
+
+
     def draw(self):
         self.image[Guitarlist.animateIndex % 6].draw(self.positionX, self.positionY, self.width, self.height)
 
