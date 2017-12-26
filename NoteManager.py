@@ -20,6 +20,9 @@ class NoteManager:
     def GetNoteList(self):
         return NoteManager.noteList
 
+    def GetMaxElementCount(self):
+        return self.maxElementCount
+
     def GetSelectElementCount(self):
         return self.selectElementCount
 
@@ -44,7 +47,7 @@ class NoteManager:
         if board.keybox[index] != None:
             if board.keybox[index].isSelect == True:
                 for i in range(self.unselectCount, self.selectElementCount):
-                    if self.noteList[i].isSelect ==True  and self.noteList[i].centerY-self.noteList[i].height/2 < board.keybox[index].centerY+self.noteList[i].height/2 +180              \
+                    if self.noteList[i].isSelect ==True  and self.noteList[i].centerY-self.noteList[i].height/2 < board.keybox[index].centerY+self.noteList[i].height/2 +170              \
                     and self.noteList[i].centerX-1 == board.keybox[index].centerX:
                         self.SetElementUnselect(i)
                         self.SetNotePosZero(i)
@@ -87,7 +90,7 @@ class NoteManager:
                                                                                                                                                                     #노트의 위치를 설정하게 된다.
             NoteManager.noteList[self.selectElementCount].centerY =735                                                                                                    #이미지의 가장 윗점 750 - Note.Height/2(15)  = 735
         elif Xpos == -1:
-            NoteManager.noteList[self.selectElementCount].centerX =  -120
+            NoteManager.noteList[self.selectElementCount].centerX = -120
             NoteManager.noteList[self.selectElementCount].cetnerY = -30
 
     def NoteDown(self,frame_Time):

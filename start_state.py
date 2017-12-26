@@ -3,7 +3,7 @@ from pico2d import *
 import main_state
 import Font
 import Board
-import MusicSelState
+import GameHelp
 
 
 
@@ -19,6 +19,7 @@ font = [Font.FONT() for i in range(Font.FONT.count)]
 mouseDown = False
 Font.mouseOnGameStart =False
 board = None
+isGameHelp = False
 
 def SetPosition(font,startFont,x,y):
     font[0].SetFontPos(x, y)  # P 위치 세팅
@@ -40,6 +41,7 @@ def SetPosition(font,startFont,x,y):
 
 def enter():
     global image,font,board,name
+
     open_canvas(1160,750)
     #board.boardImage = load_image('Board.png')
     #image = [load_image('Board.png'),load_image("stage_bitmap.png")]
@@ -63,16 +65,20 @@ def exit():
     del(font)
     del(board)
 
-    close_canvas()
+
+
+
+
 
 
 
 def update(frame_time):
-    global mouseDown
+    global mouseDown,isGameHelp
 
     if mouseDown == True:
-       # game_framework.quit()
-        game_framework.run(MusicSelState)
+        #game_framework.quit()
+        if isGameHelp is False:
+            isGameHelp = True
 
     delay(0.01)
 
@@ -81,7 +87,7 @@ def update(frame_time):
 
 
 def draw(frame_time):
-    global image,font,startFont,board,name
+    global image,font,startFont,board,name,isGameHelp
     board.draw()
 
     #image[0].draw(300,350)
@@ -92,6 +98,9 @@ def draw(frame_time):
 
     startFont.draw()
     update_canvas()
+
+    if isGameHelp is True:
+        game_framework.run(GameHelp)
 
 
 

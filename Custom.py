@@ -23,7 +23,7 @@ def enter():
     music.SetMusic(2)
     music.PlayMusic()
 
-    file = open("Text\BolBBalgan_Ctom.txt","w")
+    file = open("Text\BolBBalgan_Ctom.json","w")
 
 
 def handle_events(frame_time):

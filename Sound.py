@@ -5,8 +5,8 @@ class Sound:
     music = None
     #음악 길이
     SHAPE_OF_YOU_LENGTH = 75.00
-    MEET_ON_SPRING_LENGTH = 85.00
-    BLUE_LENGTH =75.00
+    MEET_ON_SPRING_LENGTH = 95.00
+    BLUE_LENGTH =85.00
 
     def __init__(self):
         self.endTime = 0.0           #사운드 타임

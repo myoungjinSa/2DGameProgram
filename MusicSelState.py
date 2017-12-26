@@ -8,9 +8,12 @@ name ="MusicSelState"
 
 select_screen = None
 sample_Music = Sound()
+isMain_start = None
+key_phamplet = None
+
 
 def enter():
-    global select_screen
+    global select_screen,isMain_start,key_phamplet
 
     select_screen = MusicSelScreen()
     index = select_screen.GetCurrentMusic()
@@ -19,11 +22,15 @@ def enter():
     select_screen.SetDrawPosX(580, 375)
     select_screen.SetDrawWH(1180, 760)
 
+    key_phamplet = load_image("Resource\Key_Phamplet.png")
+
+    isMain_start = False
+
 
 
 
 def handle_events(frame_time):
-    global select_screen,sample_Music
+    global select_screen,sample_Music,isMain_start
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -35,10 +42,8 @@ def handle_events(frame_time):
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_a):
             select_screen.update("left")
         elif (event.type,event.key) == (SDL_KEYDOWN,SDLK_RETURN):
-            saveMusic = open("Text\SelMusic.txt","w")
-            saveMusic.write(str(select_screen.GetCurrentMusic()))
-            saveMusic.close()
-            game_framework.run(main_state)
+            select_screen.SetMusic(select_screen.GetCurrentMusic())
+            isMain_start = True
 
 
 def update(frame_time):
@@ -53,12 +58,18 @@ def update(frame_time):
 
 
 def draw(frame_time):
-    global select_screen
+    global select_screen,isMain_start,key_phamplet
 
     clear_canvas()
     select_screen.draw()
+    key_phamplet.draw(1000,650,300,200)
+
 
     update_canvas()
+
+    if isMain_start is True:
+        game_framework.run(main_state)
+
 
 def resume():
     pass
@@ -71,5 +82,8 @@ def pause():
 def exit():
     global select_screen
     del(select_screen)
+
+
+
 
 

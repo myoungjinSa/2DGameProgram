@@ -66,12 +66,10 @@ class GameInfoScreen:
         self.drawY = y
 
 
-    def ReadMaxTotalCount(self):
-        text = open("Text\max_total.txt","r")
-        maxTotal = json.load(text)
-        self.maxHit = maxTotal[0]
-        self.totalHit = maxTotal[1]
-        text.close()
+    def ReadMaxTotalCount(self,max_total,total_Hit):
+        self.maxHit = max_total
+        self.totalHit = total_Hit
+
 
 
     def SetInfoScreenWH(self,width,height):

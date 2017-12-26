@@ -142,196 +142,196 @@ class Spectator:
                     self.drawflag = True
 
         if self.index ==2:
-            if hit >8:
-                if self.drawflag is False:
-                    self.drawflag =True
-
-        if self.index ==3:
             if hit >10:
                 if self.drawflag is False:
                     self.drawflag =True
 
+        if self.index ==3:
+            if hit >15:
+                if self.drawflag is False:
+                    self.drawflag =True
+
         if self.index ==4:
-            if hit >12:
+            if hit >20:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index ==5:
-            if hit>16:
+            if hit>25:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index ==6:
-            if hit>17:
+            if hit>30:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index == 7:
-            if hit > 19:
+            if hit > 35:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index == 8:
-            if hit>20:
+            if hit>40:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index == 9:
-            if hit>22:
+            if hit>45:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index == 10:
-            if hit>24:
+            if hit>50:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==11:
-            if hit>26:
+            if hit>55:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==12:
-            if hit>29:
+            if hit>60:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==13:
-            if hit>32:
+            if hit>65:
                 if self.drawflag is False:
                     self.drawflag = True
         if self.index ==14:
-            if hit>35:
+            if hit>70:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==15:
-            if hit >37:
+            if hit >75:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==16:
-            if hit >38:
+            if hit >80:
                 if self.drawflag is False:
                     self.drawflag = True
         if self.index ==17:
-            if hit >40:
+            if hit >85:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==18:
-            if hit >42:
+            if hit >95:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==19:
-            if hit >44:
+            if hit >100:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==20:
-            if hit >46:
+            if hit >105:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==21:
-            if hit >48:
+            if hit >110:
                 if self.drawflag is False:
                     self.drawflag = True
 
 
         if self.index ==22:
-            if hit >50:
+            if hit >115:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==23:
-            if hit >52:
+            if hit >120:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==24:
-            if hit >54:
+            if hit >125:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==25:
-            if hit >56:
+            if hit >130:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==26:
-            if hit >58:
+            if hit >135:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==27:
-            if hit >60:
+            if hit >140:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==28:
-            if hit >62:
+            if hit >145:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==29:
-            if hit >64:
+            if hit >155:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==30:
-            if hit >66:
+            if hit >160:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index ==31:
-            if hit >68:
+            if hit >165:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index == 32:
-            if hit > 70:
+            if hit > 170:
                 if self.drawflag is False:
                     self.drawflag = True
 
         if self.index == 33:
-            if hit > 72:
+            if hit > 175:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index == 34:
-            if hit > 74:
+            if hit > 180:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index == 35:
-            if hit > 76:
+            if hit > 185:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index == 36:
-            if hit > 80:
+            if hit > 190:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index == 37:
-            if hit > 82:
+            if hit > 195:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index == 38:
-            if hit > 85:
+            if hit > 200:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index == 39:
-            if hit > 88:
+            if hit > 205:
                 if self.drawflag is False:
                     self.drawflag =True
 
         if self.index ==40:
-            if hit>90:
+            if hit>210:
                 if self.drawflag is False:
                     self.drawflag =True
 

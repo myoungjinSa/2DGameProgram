@@ -7,6 +7,7 @@ from Sound import *
 from gameManager import  *
 from GameInfoState import *
 import GameInfoState
+import MusicSelState
 import json
 
 
@@ -20,7 +21,7 @@ note_manager = None
 NoteCount =False
 guitar_list = None
 spectator =None
-file_list =["Text\Shape_of_you_data.txt","Text\meet_on_spring.txt","Text\Blue.txt"]
+file_list =["Text\Shape_of_you_data.json","Text\meet_on_spring.json","Text\Blue.json"]
 Key_Status = {0:"SDLK_a",1:"SDLK_s",2:"SDLK_d",3:"SDLK_f",4:"SDLK_RETURN"}
 Distance = 0.0
 total_time = 0
@@ -30,8 +31,10 @@ sound = None
 isStart = False
 ShowHitImageFlag ={"miss":0,"hit":1,"nothing":2}
 gameManager = None
-
+save_music = None
 delay_point = None
+max_total = 0
+total_hit = 0
 #-----------------------------------------
 #               시간
 #보드의 세로 높이는     750
@@ -52,13 +55,15 @@ def enter():
     global spectator
     global file_list
     global delay_point
+    global saveMusic
+
 
     #-------보드 위치 세팅----------------
     board = Board()
     board.CreateKeyBox()
     #-------노트 생성 매니저 클래스 생성----
     note_manager = NoteManager()
-    note_manager.CreateNoteList(250)
+    note_manager.CreateNoteList(295)
     #--------시간 경과-----------
     Current_Time = get_time()
     #---------------------------
@@ -74,15 +79,16 @@ def enter():
     #-------------------------------------
     #       음악 재생
 
-    readFile = open("Text\SelMusic.txt","r")
-    music_Num = json.load(readFile)
-    readFile.close()
+    #readFile = open("Text\SelMusic.json","r")
+    #music_Num = json.load(readFile)
+    #readFile.close()
 
-    music.SetMusic(int(music_Num))              # SOUND.music_list = ["Shape_of_you.mp3","Han_ol_meet_on_spring.mp3","Bol_bbalgan_Blue.mp3"]
-    music.SetSoundLength(int(music_Num))
+    saveMusic = MusicSelState.select_screen.GetMusicReturn()
+    music.SetMusic(saveMusic)              # SOUND.music_list = ["Shape_of_you.mp3","Han_ol_meet_on_spring.mp3","Bol_bbalgan_Blue.mp3"]
+    music.SetSoundLength(saveMusic)
     #-------------------------------------
     #------음악 관련 데이타 불러오기---------
-    text_data_file = open(file_list[music_Num],'r')
+    text_data_file = open(file_list[saveMusic],'r')
     music_data = json.load(text_data_file)
     text_data_file.close()
 
@@ -93,12 +99,12 @@ def enter():
 
     #-----------------------------------
 
-    if int(music_Num)==0 :
-        delay_point = 0.011
-    elif int(music_Num)==1 :
-        delay_point =0.012
-    elif int(music_Num)==2:
-        delay_point =0.008
+    if saveMusic==0 :
+        delay_point = 0.010
+    elif saveMusic==1 :
+        delay_point =0.0125
+    elif saveMusic==2:
+        delay_point =0.010
 
 
 
@@ -107,6 +113,7 @@ def enter():
 
 def exit():
     global music,note_manager,guitar_list,gameManager,board,spectator,ShowHitImageFlag,isStart,music_time,total_time
+
     del(music)
     del(note_manager)
     del(guitar_list)
@@ -117,7 +124,6 @@ def exit():
     music_time = 0.0
 
     total_time = 0
-
 
 
 
@@ -169,7 +175,7 @@ def handle_events(frame_time):
 def update(frame_time):
     global music_time,note_manager,note_list,NoteCount,guitar_list,Current_Time
     global music,isStart,gameManager,ShowHitImageFlag,total_time,board,spectator,music_data
-    global delay_point,ShowHitImageFlag
+    global delay_point,ShowHitImageFlag,max_total,total_hit
 
 
     if isStart ==False:                                     #초반 게임이 시작되고 3초정도 딜레이시간을 가진다
@@ -184,13 +190,15 @@ def update(frame_time):
             isStart = False
             music_data =None
             music.RemoveMusic()
-            max_total=open("Text\max_total.txt",'w')
-            max_total.write("[")
-            max_total.write(str(gameManager.MaxHitCount()))
-            max_total.write(",")
-            max_total.write(str(gameManager.GetTotal()))
-            max_total.write("]")
-            max_total.close()
+            #max_total=open("Text\max_total.json",'w')
+            #max_total.write("[")
+            #max_total.write(str(gameManager.MaxHitCount()))
+            #max_total.write(",")
+            #max_total.write(str(gameManager.GetTotal()))
+            #max_total.write("]")
+            #max_total.close()
+            max_total = gameManager.MaxHitCount()
+            total_hit = gameManager.GetTotal()
             gameManager.SetTotalCountZero()
             ShowHitImageFlag = 2
             game_framework.run(GameInfoState)

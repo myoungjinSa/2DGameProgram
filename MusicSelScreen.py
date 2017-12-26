@@ -9,7 +9,14 @@ class MusicSelScreen:
         self.height = 0
         self.curImage = load_image(MusicSelScreen.Sel_image[0])                                               #현재 그리고있는 이미지
         self.curMusic = 0
+        self.saveMusic = 0
 
+
+    def SetMusic(self,music):
+        self.saveMusic = music
+
+    def GetMusicReturn(self):
+        return self.saveMusic
 
     def GetCurrentMusic(self):
         return self.curMusic

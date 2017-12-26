@@ -1,5 +1,5 @@
 import time
-
+from pico2d import *
 
 class GameState:
     def __init__(self, state):
@@ -68,7 +68,7 @@ def pop_state():
         # execute the current state's exit function
         stack[-1].exit()
         # remove the current state
-        stack.pop()
+        stack[-1].pop()
 
     # execute resume function of the previous state
     if (len(stack) > 0):
@@ -77,7 +77,7 @@ def pop_state():
 
 
 def quit():
-    global running
+    global running,stack
     running = False
 
 
@@ -100,6 +100,7 @@ def run(start_state):
     while (len(stack) > 0):
         stack[-1].exit()
         stack.pop()
+
 
 
 def reset_time():
